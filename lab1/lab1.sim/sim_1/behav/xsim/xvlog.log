@@ -1,0 +1,10 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/src/add_sub.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module add_sub
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/src/alu.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/src/full_adder.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module full_adder
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/tb/alu_tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module alu_tb
+INFO: [VRFC 10-2263] Analyzing Verilog file "C:/Users/g55wang/lab1/lab1.sim/sim_1/behav/xsim/glbl.v" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module glbl

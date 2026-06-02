@@ -1,0 +1,4 @@
+domain_path: C:\Users\g55wang\lab1_system\lab1_system.sw\alu_design_wrapper\export\alu_design_wrapper\sw\standalone_psu_cortexa53_0
+app_src_dir: C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw\lib\sw_apps\hello_world
+template: hello_world
+lang: c

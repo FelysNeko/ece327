@@ -1,0 +1,9 @@
+0.7
+2020.2
+Mar  6 2025
+19:11:35
+C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/src/add_sub.sv,1780409022,systemVerilog,,C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/src/alu.sv,,add_sub,,uvm,,,,,,
+C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/src/alu.sv,1780409037,systemVerilog,,C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/src/full_adder.sv,,alu,,uvm,,,,,,
+C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/src/full_adder.sv,1780409000,systemVerilog,,C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/tb/alu_tb.sv,,full_adder,,uvm,,,,,,
+C:/Users/g55wang/Downloads/ece327-s2026-lab1/lab1/tb/alu_tb.sv,1780408233,systemVerilog,,,,alu_tb,,uvm,,,,,,
+C:/Users/g55wang/lab1/lab1.sim/sim_1/behav/xsim/glbl.v,1734094861,verilog,,,,glbl,,uvm,,,,,,

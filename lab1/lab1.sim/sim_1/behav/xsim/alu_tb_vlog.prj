@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../../Downloads/ece327-s2026-lab1/lab1/src/add_sub.sv" \
+"../../../../../Downloads/ece327-s2026-lab1/lab1/src/alu.sv" \
+"../../../../../Downloads/ece327-s2026-lab1/lab1/src/full_adder.sv" \
+"../../../../../Downloads/ece327-s2026-lab1/lab1/tb/alu_tb.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

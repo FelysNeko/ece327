@@ -1,0 +1,13 @@
+10:38:04 INFO  : updated workspace path: 
+10:38:05 INFO  : cmd.exe, /C, C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\activate.bat && python C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw\scripts\pyesw\\repo.py -st  C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw && C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\deactivate.bat
+10:38:09 INFO  : Successfully created repository data at C:\Users\g55wang\AppData\Local\Temp\rigel_lopper_g55wang16820298032402739873
+10:38:09 INFO  : cmd.exe, /C, C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\activate.bat && python C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw\scripts\pyesw\\get_template_data.py -d C:\Users\g55wang\AppData\Local\Temp\rigel_lopper_g55wang14561833012878238235 -r C:\Users\g55wang\AppData\Local\Temp\rigel_lopper_g55wang16820298032402739873\.repo.yaml && C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\deactivate.bat
+10:38:09 INFO  : Embedded Template List generated successfully
+10:38:14 INFO  : connection terminated
+10:38:41 INFO  : cmd.exe, /C, C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\activate.bat && python C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw\scripts\pyesw\\repo.py -st  C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw && C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\deactivate.bat
+10:38:41 INFO  : created .gitignore file for the project C:\Users\g55wang\lab1_system\lab1_system.sw
+10:38:41 INFO  : Marking the target connection as default Local
+10:38:41 INFO  : Marking the target connection as default Linux Agent
+10:38:41 INFO  : Marking the target connection as default XRTServer
+10:38:41 INFO  : Marking the target connection as default LinuxEmulation
+10:38:41 INFO  : Marking the target connection as default QEMU
