@@ -1,0 +1,11 @@
+*
+
+!lab1/
+!lab1_system/
+!lab2/
+
+!/lab1/**
+!/lab1_system/**
+!/lab2/**
+
+!.gitignore
