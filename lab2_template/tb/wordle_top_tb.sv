@@ -1,272 +1,354 @@
 /***************************************************/
 /* ECE 327: Digital Hardware Systems - Spring 2026 */
 /* Lab 2                                           */
-/* Wordle Top-Level Testbench                      */
+/* Wordle Game Testbench                           */
 /***************************************************/
 
 `timescale 1ns / 1ps
 
-module wordle_top_tb;
+// Define the name of this testbench module. Since testbenches typically generate inputs and
+// monitor outputs of the circuit being tested, they usually do not have any input/output ports.
+module wordle_top_tb();
 
-    localparam NUM_LETTERS = 4;
-    localparam WORD_WIDTH  = NUM_LETTERS * 8;
-    localparam RSLT_WIDTH  = NUM_LETTERS * 2;
-    localparam MAX_GUESSES = 6;
-    localparam GUESS_CNTW  = $clog2(MAX_GUESSES) + 1;
-    localparam DICT_SIZE   = 1024;
-    localparam ADDR_WIDTH  = $clog2(DICT_SIZE);
+localparam CLK_PERIOD = 2;                          // Clock period in nanoseconds
+localparam NUM_LETTERS = 4;                         // Word size in letters
+localparam WORD_WIDTH = NUM_LETTERS * 8;            // Word bitwidth
+localparam RSLT_WIDTH = NUM_LETTERS * 2;            // Result bitwidth
+localparam MAX_GUESSES = 6;                         // Maximum number of allowed guesses
+localparam GUESS_CNTW = $clog2(MAX_GUESSES) + 1;    // Bitwidth of guess counter
+localparam DICT_SIZE = 1024;                        // Depth of the word ROM
+localparam ADDR_WIDTH = $clog2(DICT_SIZE);          // Bitwidth of ROM address
 
-    localparam [1:0] ONGOING = 2'b00;
-    localparam [1:0] LOSE    = 2'b10;
-    localparam [1:0] WIN     = 2'b11;
+// Declare logic signals for the circuit's inputs/outputs
+logic clk;
+logic rstn;
+logic [ADDR_WIDTH-1:0] i_ref_word_idx;
+logic [WORD_WIDTH-1:0] i_guess_word;
+logic [GUESS_CNTW-1:0] i_guess_id;
+logic o_ready;
+logic [RSLT_WIDTH-1:0] o_result;
+logic [GUESS_CNTW-1:0] o_guess_count;
+logic [1:0] o_game_status;
 
-    logic clk;
-    logic rstn;
-    logic [ADDR_WIDTH-1:0] i_ref_word_idx;
-    logic [WORD_WIDTH-1:0] i_guess_word;
-    logic [GUESS_CNTW-1:0] i_guess_id;
-    logic o_ready;
-    logic [RSLT_WIDTH-1:0] o_result;
-    logic [GUESS_CNTW-1:0] o_guess_count;
-    logic [1:0] o_game_status;
+// Signal to identify if simulation passed (1'b0) or failed (1'b1). Your testbench should test
+// the design and set this signal accordingly.
+logic sim_failed;
 
-    logic sim_failed;
+// Instantiate the design under test (dut), set the desired values of its parameters, and connect 
+// its input/output ports to the declared signals.
+wordle_top dut (
+    .clk(clk), 
+    .rstn(rstn),
+    .i_ref_word_idx(i_ref_word_idx),
+    .i_guess_word(i_guess_word),
+    .i_guess_id(i_guess_id),
+    .o_ready(o_ready),
+    .o_result(o_result),
+    .o_guess_count(o_guess_count),
+    .o_game_status(o_game_status)
+);
 
-    wordle_top #(
-        .NUM_LETTERS(NUM_LETTERS),
-        .MAX_GUESSES(MAX_GUESSES),
-        .DICT_SIZE(DICT_SIZE)
-    ) dut (
-        .clk(clk),
-        .rstn(rstn),
-        .i_ref_word_idx(i_ref_word_idx),
-        .i_guess_word(i_guess_word),
-        .i_guess_id(i_guess_id),
-        .o_ready(o_ready),
-        .o_result(o_result),
-        .o_guess_count(o_guess_count),
-        .o_game_status(o_game_status)
-    );
+// This initial block generates a clock signal
+initial begin
+    clk = 1'b0;
+    forever #(CLK_PERIOD/2) clk = ~clk;
+end
 
-    initial begin
-        clk = 1'b0;
-        forever #5 clk = ~clk;
-    end
+/******* Your code starts here *******/
 
-    initial begin
-        #20000;
-        $display("ERROR: simulation timeout");
-        $display("TEST FAILED!");
-        $finish;
-    end
+// Constants used only by the testbench.
+localparam logic [1:0] TB_GREY    = 2'b00;
+localparam logic [1:0] TB_GREEN   = 2'b01;
+localparam logic [1:0] TB_YELLOW  = 2'b10;
 
-    task automatic fail(input string msg);
-        begin
-            $display("ERROR: %s", msg);
-            sim_failed = 1'b1;
-            $display("TEST FAILED!");
-            $finish;
-        end
-    endtask
+localparam logic [1:0] TB_ONGOING = 2'b00;
+localparam logic [1:0] TB_LOSE    = 2'b10;
+localparam logic [1:0] TB_WIN     = 2'b11;
 
-    task automatic check_outputs(
-        input [RSLT_WIDTH-1:0] exp_result,
-        input [GUESS_CNTW-1:0] exp_count,
-        input [1:0] exp_status,
-        input exp_ready,
-        input string label
-    );
-        begin
-            if (o_result !== exp_result) begin
-                $display("%s: expected result %b, got %b", label, exp_result, o_result);
-                fail("wrong o_result");
-            end
-            if (o_guess_count !== exp_count) begin
-                $display("%s: expected count %0d, got %0d", label, exp_count, o_guess_count);
-                fail("wrong o_guess_count");
-            end
-            if (o_game_status !== exp_status) begin
-                $display("%s: expected status %b, got %b", label, exp_status, o_game_status);
-                fail("wrong o_game_status");
-            end
-            if (o_ready !== exp_ready) begin
-                $display("%s: expected ready %b, got %b", label, exp_ready, o_ready);
-                fail("wrong o_ready");
-            end
-        end
-    endtask
+localparam logic [RSLT_WIDTH-1:0] TB_ALL_GREY  = {TB_GREY,  TB_GREY,  TB_GREY,  TB_GREY};
+localparam logic [RSLT_WIDTH-1:0] TB_ALL_GREEN = {TB_GREEN, TB_GREEN, TB_GREEN, TB_GREEN};
 
+// Known ROM word indices from wordle_rom.sv.
+localparam logic [ADDR_WIDTH-1:0] IDX_SKIM = 10'd0;    // "skim"
+localparam logic [ADDR_WIDTH-1:0] IDX_MIME = 10'd21;   // "mime"
+localparam logic [ADDR_WIDTH-1:0] IDX_FURL = 10'd45;   // "furl"
+localparam logic [ADDR_WIDTH-1:0] IDX_SNOW = 10'd941;  // "snow"
 
-
-    task automatic check_state_only(
-        input [GUESS_CNTW-1:0] exp_count,
-        input [1:0] exp_status,
-        input exp_ready,
-        input string label
-    );
-        begin
-            if (o_guess_count !== exp_count) begin
-                $display("%s: expected count %0d, got %0d", label, exp_count, o_guess_count);
-                fail("wrong o_guess_count");
-            end
-            if (o_game_status !== exp_status) begin
-                $display("%s: expected status %b, got %b", label, exp_status, o_game_status);
-                fail("wrong o_game_status");
-            end
-            if (o_ready !== exp_ready) begin
-                $display("%s: expected ready %b, got %b", label, exp_ready, o_ready);
-                fail("wrong o_ready");
-            end
-        end
-    endtask
-
-    task automatic wait_ready(input string label);
-        integer cycles;
-        begin
-            cycles = 0;
-            while ((o_ready !== 1'b1) && (cycles < 20)) begin
-                @(posedge clk);
-                #1;
-                cycles = cycles + 1;
-            end
-            if (o_ready !== 1'b1) begin
-                $display("%s: DUT did not become ready", label);
-                fail("ready timeout");
-            end
-        end
-    endtask
-
-    task automatic start_game(input [ADDR_WIDTH-1:0] ref_idx, input string label);
-        begin
-            // ROM output is registered, so set the address before sending guess_id 0.
-            i_ref_word_idx = ref_idx;
-            i_guess_word = 32'h00000000;
-            repeat (2) begin
-                @(posedge clk);
-                #1;
-            end
-
-            i_guess_id = '0;
-            repeat (4) begin
-                @(posedge clk);
-                #1;
-            end
-
-            check_state_only('0, ONGOING, 1'b1, label);
-        end
-    endtask
-
-    task automatic do_guess(
-        input [WORD_WIDTH-1:0] guess_word,
-        input [GUESS_CNTW-1:0] guess_id,
-        input [RSLT_WIDTH-1:0] exp_result,
-        input [GUESS_CNTW-1:0] exp_count,
-        input [1:0] exp_status,
-        input exp_ready,
-        input string label
-    );
-        integer cycles;
-        begin
-            wait_ready(label);
-
-            i_guess_word = guess_word;
-            i_guess_id   = guess_id;
-
-            // Let the DUT latch this guess. Then change the word to catch designs
-            // that incorrectly keep using the live input instead of the registered guess.
+task automatic wait_for_ready(input string test_name);
+    int cycles;
+    begin
+        cycles = 0;
+        while ((o_ready !== 1'b1) && (cycles < 50)) begin
             @(posedge clk);
             #1;
-            i_guess_word = "zzzz";
-
-            cycles = 0;
-            while (((o_result !== exp_result) ||
-                    (o_guess_count !== exp_count) ||
-                    (o_game_status !== exp_status) ||
-                    (o_ready !== exp_ready)) && (cycles < 20)) begin
-                @(posedge clk);
-                #1;
-                cycles = cycles + 1;
-            end
-
-            if ((o_result !== exp_result) ||
-                (o_guess_count !== exp_count) ||
-                (o_game_status !== exp_status) ||
-                (o_ready !== exp_ready)) begin
-                $display("%s: outputs did not reach expected values in time", label);
-                fail("guess processing timeout");
-            end
-
-            check_outputs(exp_result, exp_count, exp_status, exp_ready, label);
+            cycles = cycles + 1;
         end
-    endtask
 
-    task automatic check_same_after_duplicate_id(
-        input [WORD_WIDTH-1:0] bad_word,
-        input [GUESS_CNTW-1:0] same_id,
-        input [RSLT_WIDTH-1:0] old_result,
-        input [GUESS_CNTW-1:0] old_count,
-        input [1:0] old_status,
-        input string label
-    );
-        begin
-            i_guess_word = bad_word;
-            i_guess_id   = same_id;
-            repeat (5) begin
-                @(posedge clk);
-                #1;
-            end
-            check_outputs(old_result, old_count, old_status, 1'b1, label);
+        if (o_ready !== 1'b1) begin
+            $display("[%0t] ERROR: timeout waiting for ready in %s", $time, test_name);
+            sim_failed = 1'b1;
         end
-    endtask
+    end
+endtask
 
-    initial begin
-        sim_failed = 1'b0;
-        rstn = 1'b0;
-        i_ref_word_idx = '0;
-        i_guess_word = '0;
-        i_guess_id = '0;
+task automatic wait_for_state(
+    input [GUESS_CNTW-1:0] exp_count,
+    input [1:0] exp_status,
+    input logic exp_ready,
+    input string test_name
+);
+    int cycles;
+    begin
+        cycles = 0;
+        while (!((o_guess_count === exp_count) &&
+                 (o_game_status === exp_status) &&
+                 (o_ready === exp_ready)) &&
+               (cycles < 50)) begin
+            @(posedge clk);
+            #1;
+            cycles = cycles + 1;
+        end
 
+        if (!((o_guess_count === exp_count) &&
+              (o_game_status === exp_status) &&
+              (o_ready === exp_ready))) begin
+            $display("[%0t] ERROR: timeout waiting for expected state in %s", $time, test_name);
+            $display("    got count=%0d status=%b ready=%b", o_guess_count, o_game_status, o_ready);
+            $display("    exp count=%0d status=%b ready=%b", exp_count, exp_status, exp_ready);
+            sim_failed = 1'b1;
+        end
+    end
+endtask
+
+task automatic check_outputs(
+    input [RSLT_WIDTH-1:0] exp_result,
+    input [GUESS_CNTW-1:0] exp_count,
+    input [1:0] exp_status,
+    input logic exp_ready,
+    input string test_name
+);
+    begin
+        if (o_result !== exp_result) begin
+            $display("[%0t] ERROR: wrong result in %s", $time, test_name);
+            $display("    got result=%b exp result=%b", o_result, exp_result);
+            sim_failed = 1'b1;
+        end
+
+        if (o_guess_count !== exp_count) begin
+            $display("[%0t] ERROR: wrong guess count in %s", $time, test_name);
+            $display("    got count=%0d exp count=%0d", o_guess_count, exp_count);
+            sim_failed = 1'b1;
+        end
+
+        if (o_game_status !== exp_status) begin
+            $display("[%0t] ERROR: wrong game status in %s", $time, test_name);
+            $display("    got status=%b exp status=%b", o_game_status, exp_status);
+            sim_failed = 1'b1;
+        end
+
+        if (o_ready !== exp_ready) begin
+            $display("[%0t] ERROR: wrong ready in %s", $time, test_name);
+            $display("    got ready=%b exp ready=%b", o_ready, exp_ready);
+            sim_failed = 1'b1;
+        end
+    end
+endtask
+
+task automatic start_game(
+    input [ADDR_WIDTH-1:0] ref_idx,
+    input string test_name
+);
+    begin
+        @(negedge clk);
+        i_ref_word_idx = ref_idx;
+        i_guess_word   = '0;
+        i_guess_id     = '0;
+
+        // Give the synchronous ROM and FSM a few cycles to see guess_id=0
+        // and register the new reference word.
         repeat (4) begin
             @(posedge clk);
             #1;
         end
-        rstn = 1'b1;
-        repeat (2) begin
+
+        wait_for_state('0, TB_ONGOING, 1'b1, test_name);
+    end
+endtask
+
+task automatic submit_guess_and_check(
+    input [WORD_WIDTH-1:0] guess_word,
+    input [GUESS_CNTW-1:0] guess_id,
+    input [RSLT_WIDTH-1:0] exp_result,
+    input [GUESS_CNTW-1:0] exp_count,
+    input [1:0] exp_status,
+    input string test_name
+);
+    logic exp_ready;
+    begin
+        exp_ready = (exp_status == TB_ONGOING);
+
+        wait_for_ready(test_name);
+
+        @(negedge clk);
+        i_guess_word = guess_word;
+        i_guess_id   = guess_id;
+
+        // The DUT should register i_guess_word when it accepts the new guess.
+        // After that, the input is allowed to change.
+        @(posedge clk);
+        #1;
+        i_guess_word = "zzzz";
+
+        wait_for_state(exp_count, exp_status, exp_ready, test_name);
+        check_outputs(exp_result, exp_count, exp_status, exp_ready, test_name);
+    end
+endtask
+
+task automatic submit_duplicate_id_and_check(
+    input [WORD_WIDTH-1:0] guess_word,
+    input [GUESS_CNTW-1:0] duplicate_id,
+    input [RSLT_WIDTH-1:0] old_result,
+    input [GUESS_CNTW-1:0] old_count,
+    input [1:0] old_status,
+    input string test_name
+);
+    begin
+        wait_for_ready(test_name);
+
+        @(negedge clk);
+        i_guess_word = guess_word;
+        i_guess_id   = duplicate_id;
+
+        repeat (5) begin
             @(posedge clk);
             #1;
         end
 
-        // Game 1: ROM index 941 is "snow". Manual example: "once" => YGXX = 8'b10010000.
-        start_game(10'd941, "start snow");
-        do_guess("once", 4'd1, 8'b10010000, 4'd1, ONGOING, 1'b1, "snow / once");
-
-        // Same guess ID must be ignored even if the word changes to the winning word.
-        check_same_after_duplicate_id("snow", 4'd1, 8'b10010000, 4'd1, ONGOING, "duplicate guess_id ignored");
-
-        // Finish this game with a loss after exactly 6 accepted guesses.
-        do_guess("aaaa", 4'd2, 8'h00, 4'd2, ONGOING, 1'b1, "snow / aaaa");
-        do_guess("bbbb", 4'd3, 8'h00, 4'd3, ONGOING, 1'b1, "snow / bbbb");
-        do_guess("cccc", 4'd4, 8'h00, 4'd4, ONGOING, 1'b1, "snow / cccc");
-        do_guess("dddd", 4'd5, 8'h00, 4'd5, ONGOING, 1'b1, "snow / dddd");
-        do_guess("eeee", 4'd6, 8'h00, 4'd6, LOSE,    1'b0, "snow / eeee lose");
-
-        // Game 2: ROM index 45 is "furl". Repeated-letter special case:
-        // "aaff" has one misplaced f available, so only the LAST f is yellow => XXXY = 8'b00000010.
-        start_game(10'd45, "start furl");
-        do_guess("aaff", 4'd1, 8'b00000010, 4'd1, ONGOING, 1'b1, "furl / aaff repeated yellow");
-        do_guess("furl", 4'd2, 8'b01010101, 4'd2, WIN,     1'b0, "furl / furl win");
-
-        // Game 3: ROM index 25 is "loll". This checks that greens are handled before yellows.
-        start_game(10'd25, "start loll");
-        do_guess("llll", 4'd1, 8'b01000101, 4'd1, ONGOING, 1'b1, "loll / llll green priority");
-        do_guess("loll", 4'd2, 8'b01010101, 4'd2, WIN,     1'b0, "loll / loll win");
-
-        if (sim_failed) begin
-            $display("TEST FAILED!");
-        end else begin
-            $display("TEST PASSED!");
-        end
-        $finish;
+        check_outputs(old_result, old_count, old_status, 1'b1, test_name);
     end
+endtask
+
+/******* Your code ends here ********/
+
+initial begin
+    // Reset all testbench signals
+    sim_failed = 1'b0;
+    rstn = 1'b0;
+    i_ref_word_idx = 'd0;
+    i_guess_word = 'd0;
+    i_guess_id = 'd0;
+    #(5*CLK_PERIOD);
+
+    /******* Your code starts here *******/
+    
+    // Release active-low reset.
+    rstn = 1'b1;
+
+    // ------------------------------------------------------------
+    // Game 1: normal yellow/green/grey result, duplicate ID ignored,
+    // then win.
+    // Reference index 941 is "snow".
+    // "once" vs "snow" = YELLOW, GREEN, GREY, GREY = 8'b10010000.
+    // ------------------------------------------------------------
+    start_game(IDX_SNOW, "start game: snow");
+
+    submit_guess_and_check(
+        "once",
+        'd1,
+        {TB_YELLOW, TB_GREEN, TB_GREY, TB_GREY},
+        'd1,
+        TB_ONGOING,
+        "snow / once"
+    );
+
+    // Same guess_id must be ignored even if the word changes to the answer.
+    submit_duplicate_id_and_check(
+        "snow",
+        'd1,
+        {TB_YELLOW, TB_GREEN, TB_GREY, TB_GREY},
+        'd1,
+        TB_ONGOING,
+        "duplicate guess_id ignored"
+    );
+
+    submit_guess_and_check(
+        "snow",
+        'd2,
+        TB_ALL_GREEN,
+        'd2,
+        TB_WIN,
+        "snow / snow win"
+    );
+
+    // ------------------------------------------------------------
+    // Game 2: repeated-letter rule and losing after 6 guesses.
+    // Reference index 0 is "skim".
+    // "aass" has two s letters, but "skim" has one s in a different
+    // location. Only the LAST s should be yellow.
+    // ------------------------------------------------------------
+    start_game(IDX_SKIM, "start game: skim");
+
+    submit_guess_and_check(
+        "aass",
+        'd1,
+        {TB_GREY, TB_GREY, TB_GREY, TB_YELLOW},
+        'd1,
+        TB_ONGOING,
+        "skim / aass repeated-letter rule"
+    );
+
+    submit_guess_and_check("bbbb", 'd2, TB_ALL_GREY, 'd2, TB_ONGOING, "skim / bbbb");
+    submit_guess_and_check("cccc", 'd3, TB_ALL_GREY, 'd3, TB_ONGOING, "skim / cccc");
+    submit_guess_and_check("dddd", 'd4, TB_ALL_GREY, 'd4, TB_ONGOING, "skim / dddd");
+    submit_guess_and_check("eeee", 'd5, TB_ALL_GREY, 'd5, TB_ONGOING, "skim / eeee");
+
+    submit_guess_and_check(
+        "ffff",
+        'd6,
+        TB_ALL_GREY,
+        'd6,
+        TB_LOSE,
+        "skim / lose on sixth guess"
+    );
+
+    // ------------------------------------------------------------
+    // Game 3: green-before-yellow and last occurrence yellow.
+    // Reference index 21 is "mime".
+    // "immi" vs "mime":
+    //   i at pos0: grey because the only i is used by the later i
+    //   m at pos1: yellow
+    //   m at pos2: green
+    //   i at pos3: yellow
+    // Expected = GREY, YELLOW, GREEN, YELLOW.
+    // ------------------------------------------------------------
+    start_game(IDX_MIME, "start game: mime");
+
+    submit_guess_and_check(
+        "immi",
+        'd1,
+        {TB_GREY, TB_YELLOW, TB_GREEN, TB_YELLOW},
+        'd1,
+        TB_ONGOING,
+        "mime / immi green-before-yellow"
+    );
+
+    submit_guess_and_check(
+        "mime",
+        'd2,
+        TB_ALL_GREEN,
+        'd2,
+        TB_WIN,
+        "mime / mime win"
+    );
+    
+    /******* Your code ends here ********/
+    
+    if (sim_failed) begin
+        $display("TEST FAILED!");
+    end else begin
+        $display("TEST PASSED!");
+    end 
+    $stop;
+end
 
 endmodule
