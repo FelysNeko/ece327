@@ -1,0 +1,84 @@
+Time resolution is 1 ps
+----------------------------------------
+Test 0: reset, then start game. ref = furl
+After reset
+Got:      result = 00000000, count = 0, status = 00, ready = 1
+Expected: result = 00000000, count = 0, status = 00, ready = 1
+Reset test correct.
+----------------------------------------
+Test 1: guess word should be registered. ref = furl
+Round 1: first input was farm, later input changed to furl
+Got:      result = 01000100, count = 1, status = 00, ready = 1
+Expected: result = 01000100 (GXGX), count = 1, status = 00, ready = 1
+Guess register test correct.
+Same ID test: guess = furl, guess_id is still 1
+Got:      result = 01000100, count = 1, status = 00, ready = 1
+Expected: result = 01000100 (GXGX), count = 1, status = 00, ready = 1
+Same ID test correct.
+Reference lock test: ref index changed to skew, guess = skew
+Got:      result = 00000000, count = 2, status = 00, ready = 1
+Expected: result = 00000000 (XXXX), count = 2, status = 00, ready = 1
+Reference lock test correct.
+Lower ID test: guess = furl, guess_id changed from 4 down to 3
+Got:      result = 00000000, count = 2, status = 00, ready = 1
+Expected: result = 00000000 (XXXX), count = 2, status = 00, ready = 1
+Lower ID test correct.
+Win test: guess = furl
+Got:      result = 01010101, count = 3, status = 11, ready = 0
+Expected: result = 01010101 (GGGG), count = 3, status = 11, ready = 0
+Win test correct.
+After WIN ignore test: guess = aaaa, guess_id = 6
+Got:      result = 01010101, count = 3, status = 11, ready = 0
+Expected: result = 01010101 (GGGG), count = 3, status = 11, ready = 0
+After WIN ignore test correct.
+----------------------------------------
+Test 7: new game after WIN. ref = skew
+New game after WIN
+Got:      result = 00000000, count = 0, status = 00, ready = 1
+Expected: result = 00000000 (XXXX), count = 0, status = 00, ready = 1
+New game after WIN correct.
+All yellow test: ref = skew, guess = weks
+Got:      result = 10101010, count = 1, status = 00, ready = 1
+Expected: result = 10101010 (YYYY), count = 1, status = 00, ready = 1
+All yellow test correct.
+Mixed result test: ref = skew, guess = sink
+Got:      result = 01000010, count = 2, status = 00, ready = 1
+Expected: result = 01000010 (GXXY), count = 2, status = 00, ready = 1
+Mixed result test correct.
+Win skew test: guess = skew
+Got:      result = 01010101, count = 3, status = 11, ready = 0
+Expected: result = 01010101 (GGGG), count = 3, status = 11, ready = 0
+Win skew test correct.
+----------------------------------------
+Test 10: last occurrence rule. ref = furl
+Last occurrence test: ref = furl, guess = llaa
+Got:      result = 00100000, count = 1, status = 00, ready = 1
+Expected: result = 00100000 (XYXX), count = 1, status = 00, ready = 1
+Last occurrence test correct.
+Green consumes first test: ref = furl, guess = lurl
+Got:      result = 00010101, count = 2, status = 00, ready = 1
+Expected: result = 00010101 (XGGG), count = 2, status = 00, ready = 1
+Green consumes first test correct.
+Win after duplicate tests: guess = furl
+Got:      result = 01010101, count = 3, status = 11, ready = 0
+Expected: result = 01010101 (GGGG), count = 3, status = 11, ready = 0
+Win after duplicate tests correct.
+----------------------------------------
+Test 12: repeated reference letters. ref = cool
+Repeated ref test 1: ref = cool, guess = oooo
+Got:      result = 00010100, count = 1, status = 00, ready = 1
+Expected: result = 00010100 (XGGX), count = 1, status = 00, ready = 1
+Repeated ref test 1 correct.
+Repeated ref test 2: ref = cool, guess = loll
+Got:      result = 00010001, count = 2, status = 00, ready = 1
+Expected: result = 00010001 (XGXG), count = 2, status = 00, ready = 1
+Repeated ref test 2 correct.
+Repeated ref test 3: ref = cool, guess = loop
+Got:      result = 10010100, count = 3, status = 00, ready = 1
+Expected: result = 10010100 (YGGX), count = 3, status = 00, ready = 1
+Repeated ref test 3 correct.
+Win cool test: guess = cool
+Got:      result = 01010101, count = 4, status = 11, ready = 0
+Expected: result = 01010101 (GGGG), count = 4, status = 11, ready = 0
+Win cool test correct.
+-----------------

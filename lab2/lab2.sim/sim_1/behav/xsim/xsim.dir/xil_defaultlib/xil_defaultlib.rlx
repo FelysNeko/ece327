@@ -6,4 +6,4 @@ C:/Users/g55wang/lab2/lab2.sim/sim_1/behav/xsim/glbl.v,1734094861,verilog,,,,glb
 C:/Users/g55wang/lab2_template/src/wordle_fsm.sv,1781191205,systemVerilog,,C:/Users/g55wang/lab2_template/src/wordle_rom.sv,,word_to_colour;wordle_fsm,,uvm,,,,,,
 C:/Users/g55wang/lab2_template/src/wordle_rom.sv,1781188481,systemVerilog,,C:/Users/g55wang/lab2_template/src/wordle_top.sv,,wordle_rom,,uvm,,,,,,
 C:/Users/g55wang/lab2_template/src/wordle_top.sv,1781188481,systemVerilog,,C:/Users/g55wang/lab2_template/tb/wordle_top_tb.sv,,wordle_top,,uvm,,,,,,
-C:/Users/g55wang/lab2_template/tb/wordle_top_tb.sv,1781189511,systemVerilog,,,,wordle_top_tb,,uvm,,,,,,
+C:/Users/g55wang/lab2_template/tb/wordle_top_tb.sv,1781192140,systemVerilog,,,,wordle_top_tb,,uvm,,,,,,
