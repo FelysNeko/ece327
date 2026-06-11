@@ -1,0 +1,12 @@
+# compile verilog/system verilog design source files
+sv xil_defaultlib  \
+"../../../../../lab2_template/src/wordle_fsm.sv" \
+"../../../../../lab2_template/src/wordle_rom.sv" \
+"../../../../../lab2_template/src/wordle_top.sv" \
+"../../../../../lab2_template/tb/wordle_top_tb.sv" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort
