@@ -56,177 +56,25 @@ end
 
 /******* Your code starts here *******/
 
-// Constants used only by the testbench.
-localparam logic [1:0] TB_GREY    = 2'b00;
-localparam logic [1:0] TB_GREEN   = 2'b01;
-localparam logic [1:0] TB_YELLOW  = 2'b10;
+// Colour values used by the lab.
+localparam [1:0] X = 2'b00;
+localparam [1:0] G = 2'b01;
+localparam [1:0] Y = 2'b10;
 
-localparam logic [1:0] TB_ONGOING = 2'b00;
-localparam logic [1:0] TB_LOSE    = 2'b10;
-localparam logic [1:0] TB_WIN     = 2'b11;
+// Game status values used by the lab.
+localparam [1:0] STATUS_ON   = 2'b00;
+localparam [1:0] STATUS_LOSE = 2'b10;
+localparam [1:0] STATUS_WIN  = 2'b11;
 
-localparam logic [RSLT_WIDTH-1:0] TB_ALL_GREY  = {TB_GREY,  TB_GREY,  TB_GREY,  TB_GREY};
-localparam logic [RSLT_WIDTH-1:0] TB_ALL_GREEN = {TB_GREEN, TB_GREEN, TB_GREEN, TB_GREEN};
+// Result words. Left letter is the left side of this vector.
+localparam [RSLT_WIDTH-1:0] RES_XXXX = {X, X, X, X};
+localparam [RSLT_WIDTH-1:0] RES_GXGX = {G, X, G, X};
+localparam [RSLT_WIDTH-1:0] RES_GGGX = {G, G, G, X};
+localparam [RSLT_WIDTH-1:0] RES_GGGG = {G, G, G, G};
+localparam [RSLT_WIDTH-1:0] RES_XYXX = {X, Y, X, X};
+localparam [RSLT_WIDTH-1:0] RES_XGXG = {X, G, X, G};
 
-// Known ROM word indices from wordle_rom.sv.
-localparam logic [ADDR_WIDTH-1:0] IDX_SKIM = 10'd0;    // "skim"
-localparam logic [ADDR_WIDTH-1:0] IDX_MIME = 10'd21;   // "mime"
-localparam logic [ADDR_WIDTH-1:0] IDX_FURL = 10'd45;   // "furl"
-localparam logic [ADDR_WIDTH-1:0] IDX_SNOW = 10'd941;  // "snow"
-
-task automatic wait_for_ready(input string test_name);
-    int cycles;
-    begin
-        cycles = 0;
-        while ((o_ready !== 1'b1) && (cycles < 50)) begin
-            @(posedge clk);
-            #1;
-            cycles = cycles + 1;
-        end
-
-        if (o_ready !== 1'b1) begin
-            $display("[%0t] ERROR: timeout waiting for ready in %s", $time, test_name);
-            sim_failed = 1'b1;
-        end
-    end
-endtask
-
-task automatic wait_for_state(
-    input [GUESS_CNTW-1:0] exp_count,
-    input [1:0] exp_status,
-    input logic exp_ready,
-    input string test_name
-);
-    int cycles;
-    begin
-        cycles = 0;
-        while (!((o_guess_count === exp_count) &&
-                 (o_game_status === exp_status) &&
-                 (o_ready === exp_ready)) &&
-               (cycles < 50)) begin
-            @(posedge clk);
-            #1;
-            cycles = cycles + 1;
-        end
-
-        if (!((o_guess_count === exp_count) &&
-              (o_game_status === exp_status) &&
-              (o_ready === exp_ready))) begin
-            $display("[%0t] ERROR: timeout waiting for expected state in %s", $time, test_name);
-            $display("    got count=%0d status=%b ready=%b", o_guess_count, o_game_status, o_ready);
-            $display("    exp count=%0d status=%b ready=%b", exp_count, exp_status, exp_ready);
-            sim_failed = 1'b1;
-        end
-    end
-endtask
-
-task automatic check_outputs(
-    input [RSLT_WIDTH-1:0] exp_result,
-    input [GUESS_CNTW-1:0] exp_count,
-    input [1:0] exp_status,
-    input logic exp_ready,
-    input string test_name
-);
-    begin
-        if (o_result !== exp_result) begin
-            $display("[%0t] ERROR: wrong result in %s", $time, test_name);
-            $display("    got result=%b exp result=%b", o_result, exp_result);
-            sim_failed = 1'b1;
-        end
-
-        if (o_guess_count !== exp_count) begin
-            $display("[%0t] ERROR: wrong guess count in %s", $time, test_name);
-            $display("    got count=%0d exp count=%0d", o_guess_count, exp_count);
-            sim_failed = 1'b1;
-        end
-
-        if (o_game_status !== exp_status) begin
-            $display("[%0t] ERROR: wrong game status in %s", $time, test_name);
-            $display("    got status=%b exp status=%b", o_game_status, exp_status);
-            sim_failed = 1'b1;
-        end
-
-        if (o_ready !== exp_ready) begin
-            $display("[%0t] ERROR: wrong ready in %s", $time, test_name);
-            $display("    got ready=%b exp ready=%b", o_ready, exp_ready);
-            sim_failed = 1'b1;
-        end
-    end
-endtask
-
-task automatic start_game(
-    input [ADDR_WIDTH-1:0] ref_idx,
-    input string test_name
-);
-    begin
-        @(negedge clk);
-        i_ref_word_idx = ref_idx;
-        i_guess_word   = '0;
-        i_guess_id     = '0;
-
-        // Give the synchronous ROM and FSM a few cycles to see guess_id=0
-        // and register the new reference word.
-        repeat (4) begin
-            @(posedge clk);
-            #1;
-        end
-
-        wait_for_state('0, TB_ONGOING, 1'b1, test_name);
-    end
-endtask
-
-task automatic submit_guess_and_check(
-    input [WORD_WIDTH-1:0] guess_word,
-    input [GUESS_CNTW-1:0] guess_id,
-    input [RSLT_WIDTH-1:0] exp_result,
-    input [GUESS_CNTW-1:0] exp_count,
-    input [1:0] exp_status,
-    input string test_name
-);
-    logic exp_ready;
-    begin
-        exp_ready = (exp_status == TB_ONGOING);
-
-        wait_for_ready(test_name);
-
-        @(negedge clk);
-        i_guess_word = guess_word;
-        i_guess_id   = guess_id;
-
-        // The DUT should register i_guess_word when it accepts the new guess.
-        // After that, the input is allowed to change.
-        @(posedge clk);
-        #1;
-        i_guess_word = "zzzz";
-
-        wait_for_state(exp_count, exp_status, exp_ready, test_name);
-        check_outputs(exp_result, exp_count, exp_status, exp_ready, test_name);
-    end
-endtask
-
-task automatic submit_duplicate_id_and_check(
-    input [WORD_WIDTH-1:0] guess_word,
-    input [GUESS_CNTW-1:0] duplicate_id,
-    input [RSLT_WIDTH-1:0] old_result,
-    input [GUESS_CNTW-1:0] old_count,
-    input [1:0] old_status,
-    input string test_name
-);
-    begin
-        wait_for_ready(test_name);
-
-        @(negedge clk);
-        i_guess_word = guess_word;
-        i_guess_id   = duplicate_id;
-
-        repeat (5) begin
-            @(posedge clk);
-            #1;
-        end
-
-        check_outputs(old_result, old_count, old_status, 1'b1, test_name);
-    end
-endtask
+integer wait_count;
 
 /******* Your code ends here ********/
 
@@ -240,108 +88,338 @@ initial begin
     #(5*CLK_PERIOD);
 
     /******* Your code starts here *******/
-    
-    // Release active-low reset.
+
+    // Test 1: normal game with reference word "furl".
+    $display("----------------------------------------");
+    $display("Test 1: ref word = furl");
+    i_ref_word_idx = 10'd45;     // ROM word 45 is "furl"
+    i_guess_word = 32'd0;
+    i_guess_id = 0;
+    #(3*CLK_PERIOD);
     rstn = 1'b1;
+    #(6*CLK_PERIOD);
 
-    // ------------------------------------------------------------
-    // Game 1: normal yellow/green/grey result, duplicate ID ignored,
-    // then win.
-    // Reference index 941 is "snow".
-    // "once" vs "snow" = YELLOW, GREEN, GREY, GREY = 8'b10010000.
-    // ------------------------------------------------------------
-    start_game(IDX_SNOW, "start game: snow");
+    // Round 1: farm -> GXGX
+    i_guess_word = "farm";
+    i_guess_id = 1;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
 
-    submit_guess_and_check(
-        "once",
-        'd1,
-        {TB_YELLOW, TB_GREEN, TB_GREY, TB_GREY},
-        'd1,
-        TB_ONGOING,
-        "snow / once"
-    );
+    $display("Round 1: guess = farm");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 1, status = %b, ready = 1", RES_GXGX, STATUS_ON);
+    if ((o_result != RES_GXGX) || (o_guess_count != 1) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("Round 1 wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Round 1 correct.");
+    end
 
-    // Same guess_id must be ignored even if the word changes to the answer.
-    submit_duplicate_id_and_check(
-        "snow",
-        'd1,
-        {TB_YELLOW, TB_GREEN, TB_GREY, TB_GREY},
-        'd1,
-        TB_ONGOING,
-        "duplicate guess_id ignored"
-    );
+    // Same guess id should be ignored.
+    i_guess_word = "furl";
+    i_guess_id = 1;
+    #(8*CLK_PERIOD);
 
-    submit_guess_and_check(
-        "snow",
-        'd2,
-        TB_ALL_GREEN,
-        'd2,
-        TB_WIN,
-        "snow / snow win"
-    );
+    $display("Same ID test: guess = furl, guess_id still 1");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 1, status = %b, ready = 1", RES_GXGX, STATUS_ON);
+    if ((o_result != RES_GXGX) || (o_guess_count != 1) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("Same ID test wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Same ID test correct.");
+    end
 
-    // ------------------------------------------------------------
-    // Game 2: repeated-letter rule and losing after 6 guesses.
-    // Reference index 0 is "skim".
-    // "aass" has two s letters, but "skim" has one s in a different
-    // location. Only the LAST s should be yellow.
-    // ------------------------------------------------------------
-    start_game(IDX_SKIM, "start game: skim");
+    // Round 2: fury -> GGGX
+    i_guess_word = "fury";
+    i_guess_id = 2;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
 
-    submit_guess_and_check(
-        "aass",
-        'd1,
-        {TB_GREY, TB_GREY, TB_GREY, TB_YELLOW},
-        'd1,
-        TB_ONGOING,
-        "skim / aass repeated-letter rule"
-    );
+    $display("Round 2: guess = fury");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 2, status = %b, ready = 1", RES_GGGX, STATUS_ON);
+    if ((o_result != RES_GGGX) || (o_guess_count != 2) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("Round 2 wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Round 2 correct.");
+    end
 
-    submit_guess_and_check("bbbb", 'd2, TB_ALL_GREY, 'd2, TB_ONGOING, "skim / bbbb");
-    submit_guess_and_check("cccc", 'd3, TB_ALL_GREY, 'd3, TB_ONGOING, "skim / cccc");
-    submit_guess_and_check("dddd", 'd4, TB_ALL_GREY, 'd4, TB_ONGOING, "skim / dddd");
-    submit_guess_and_check("eeee", 'd5, TB_ALL_GREY, 'd5, TB_ONGOING, "skim / eeee");
+    // Round 3: furl -> GGGG, win
+    i_guess_word = "furl";
+    i_guess_id = 3;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
 
-    submit_guess_and_check(
-        "ffff",
-        'd6,
-        TB_ALL_GREY,
-        'd6,
-        TB_LOSE,
-        "skim / lose on sixth guess"
-    );
+    $display("Round 3: guess = furl");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 3, status = %b, ready = 0", RES_GGGG, STATUS_WIN);
+    if ((o_result != RES_GGGG) || (o_guess_count != 3) || (o_game_status != STATUS_WIN) || (o_ready != 1'b0)) begin
+        $display("Round 3 wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Round 3 correct.");
+    end
 
-    // ------------------------------------------------------------
-    // Game 3: green-before-yellow and last occurrence yellow.
-    // Reference index 21 is "mime".
-    // "immi" vs "mime":
-    //   i at pos0: grey because the only i is used by the later i
-    //   m at pos1: yellow
-    //   m at pos2: green
-    //   i at pos3: yellow
-    // Expected = GREY, YELLOW, GREEN, YELLOW.
-    // ------------------------------------------------------------
-    start_game(IDX_MIME, "start game: mime");
+    // Start a new game after WIN by setting guess_id to 0.
+    $display("----------------------------------------");
+    $display("Test 2: start new game after WIN");
+    i_ref_word_idx = 10'd45;     // "furl"
+    i_guess_word = 32'd0;
+    i_guess_id = 0;
+    #(10*CLK_PERIOD);
 
-    submit_guess_and_check(
-        "immi",
-        'd1,
-        {TB_GREY, TB_YELLOW, TB_GREEN, TB_YELLOW},
-        'd1,
-        TB_ONGOING,
-        "mime / immi green-before-yellow"
-    );
+    $display("New game after WIN");
+    $display("Got:      count = %0d, status = %b, ready = %b", o_guess_count, o_game_status, o_ready);
+    $display("Expected: count = 0, status = %b, ready = 1", STATUS_ON);
+    if ((o_guess_count != 0) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("New game after WIN wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("New game after WIN correct.");
+    end
 
-    submit_guess_and_check(
-        "mime",
-        'd2,
-        TB_ALL_GREEN,
-        'd2,
-        TB_WIN,
-        "mime / mime win"
-    );
-    
-    /******* Your code ends here ********/
+    // Repeated letter test: ref furl, guess llaa.
+    // There is only one l in furl, so only the last l in llaa should be yellow.
+    i_guess_word = "llaa";
+    i_guess_id = 1;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
+
+    $display("Repeated letter test: guess = llaa");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 1, status = %b, ready = 1", RES_XYXX, STATUS_ON);
+    if ((o_result != RES_XYXX) || (o_guess_count != 1) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("Repeated letter test wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Repeated letter test correct.");
+    end
+
+    // Test 3: green letters should be used first.
+    $display("----------------------------------------");
+    $display("Test 3: green before yellow, ref word = cool");
+    rstn = 1'b0;
+    i_ref_word_idx = 10'd153;    // ROM word 153 is "cool"
+    i_guess_word = 32'd0;
+    i_guess_id = 0;
+    #(5*CLK_PERIOD);
+    rstn = 1'b1;
+    #(6*CLK_PERIOD);
+
+    // ref cool, guess loll -> XGXG
+    i_guess_word = "loll";
+    i_guess_id = 1;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
+
+    $display("Green before yellow test: guess = loll");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 1, status = %b, ready = 1", RES_XGXG, STATUS_ON);
+    if ((o_result != RES_XGXG) || (o_guess_count != 1) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("Green before yellow test wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Green before yellow test correct.");
+    end
+
+    // Test 4: lose after 6 wrong guesses.
+    $display("----------------------------------------");
+    $display("Test 4: lose after 6 wrong guesses, ref word = skew");
+    rstn = 1'b0;
+    i_ref_word_idx = 10'd103;    // ROM word 103 is "skew"
+    i_guess_word = 32'd0;
+    i_guess_id = 0;
+    #(5*CLK_PERIOD);
+    rstn = 1'b1;
+    #(6*CLK_PERIOD);
+
+    // Round 1 of lose test.
+    i_guess_word = "aaaa";
+    i_guess_id = 1;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
+    $display("Lose test round 1: guess = aaaa");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 1, status = %b, ready = 1", RES_XXXX, STATUS_ON);
+    if ((o_result != RES_XXXX) || (o_guess_count != 1) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("Lose test round 1 wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Lose test round 1 correct.");
+    end
+
+    // Round 2 of lose test.
+    i_guess_word = "aaaa";
+    i_guess_id = 2;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
+    $display("Lose test round 2: guess = aaaa");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 2, status = %b, ready = 1", RES_XXXX, STATUS_ON);
+    if ((o_result != RES_XXXX) || (o_guess_count != 2) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("Lose test round 2 wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Lose test round 2 correct.");
+    end
+
+    // Round 3 of lose test.
+    i_guess_word = "aaaa";
+    i_guess_id = 3;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
+    $display("Lose test round 3: guess = aaaa");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 3, status = %b, ready = 1", RES_XXXX, STATUS_ON);
+    if ((o_result != RES_XXXX) || (o_guess_count != 3) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("Lose test round 3 wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Lose test round 3 correct.");
+    end
+
+    // Round 4 of lose test.
+    i_guess_word = "aaaa";
+    i_guess_id = 4;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
+    $display("Lose test round 4: guess = aaaa");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 4, status = %b, ready = 1", RES_XXXX, STATUS_ON);
+    if ((o_result != RES_XXXX) || (o_guess_count != 4) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("Lose test round 4 wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Lose test round 4 correct.");
+    end
+
+    // Round 5 of lose test.
+    i_guess_word = "aaaa";
+    i_guess_id = 5;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
+    $display("Lose test round 5: guess = aaaa");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 5, status = %b, ready = 1", RES_XXXX, STATUS_ON);
+    if ((o_result != RES_XXXX) || (o_guess_count != 5) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("Lose test round 5 wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Lose test round 5 correct.");
+    end
+
+    // Round 6 of lose test. This should lose the game.
+    i_guess_word = "aaaa";
+    i_guess_id = 6;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
+    $display("Lose test round 6: guess = aaaa");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 6, status = %b, ready = 0", RES_XXXX, STATUS_LOSE);
+    if ((o_result != RES_XXXX) || (o_guess_count != 6) || (o_game_status != STATUS_LOSE) || (o_ready != 1'b0)) begin
+        $display("Lose test round 6 wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("Lose test round 6 correct.");
+    end
+
+    // Start a new game after LOSE.
+    $display("----------------------------------------");
+    $display("Test 5: start new game after LOSE");
+    i_ref_word_idx = 10'd45;     // "furl"
+    i_guess_word = 32'd0;
+    i_guess_id = 0;
+    #(10*CLK_PERIOD);
+
+    $display("New game after LOSE");
+    $display("Got:      count = %0d, status = %b, ready = %b", o_guess_count, o_game_status, o_ready);
+    $display("Expected: count = 0, status = %b, ready = 1", STATUS_ON);
+    if ((o_guess_count != 0) || (o_game_status != STATUS_ON) || (o_ready != 1'b1)) begin
+        $display("New game after LOSE wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("New game after LOSE correct.");
+    end
+
+    // Guess the new game correctly.
+    i_guess_word = "furl";
+    i_guess_id = 1;
+    #(2*CLK_PERIOD);
+    wait_count = 0;
+    while ((o_ready == 1'b0) && (o_game_status == STATUS_ON) && (wait_count < 50)) begin
+        #(CLK_PERIOD);
+        wait_count = wait_count + 1;
+    end
+    #(2*CLK_PERIOD);
+
+    $display("New game round 1: guess = furl");
+    $display("Got:      result = %b, count = %0d, status = %b, ready = %b", o_result, o_guess_count, o_game_status, o_ready);
+    $display("Expected: result = %b, count = 1, status = %b, ready = 0", RES_GGGG, STATUS_WIN);
+    if ((o_result != RES_GGGG) || (o_guess_count != 1) || (o_game_status != STATUS_WIN) || (o_ready != 1'b0)) begin
+        $display("New game round 1 wrong.");
+        sim_failed = 1'b1;
+    end else begin
+        $display("New game round 1 correct.");
+    end
+
+/******* Your code ends here ********/
     
     if (sim_failed) begin
         $display("TEST FAILED!");

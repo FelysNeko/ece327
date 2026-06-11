@@ -6,4 +6,21 @@ Using 2 slave threads.
 Starting static elaboration
 Pass Through NonSizing Optimizer
 Completed static elaboration
-INFO: [XSIM 43-4323] No Change in HDL. Linking previously generated obj files to create kernel
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_top.sv" Line 10. Module wordle_top_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" Line 7. Module wordle_fsm_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" Line 174. Module word_to_colour(WORD_WIDTH=32,RSLT_WIDTH=8) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_rom.sv" Line 13. Module wordle_rom doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_top.sv" Line 10. Module wordle_top_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" Line 7. Module wordle_fsm_default doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" Line 174. Module word_to_colour(WORD_WIDTH=32,RSLT_WIDTH=8) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_rom.sv" Line 13. Module wordle_rom doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module xil_defaultlib.word_to_colour(WORD_WIDTH=32,RSL...
+Compiling module xil_defaultlib.wordle_fsm_default
+Compiling module xil_defaultlib.wordle_rom
+Compiling module xil_defaultlib.wordle_top_default
+Compiling module xil_defaultlib.wordle_top_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot wordle_top_tb_behav

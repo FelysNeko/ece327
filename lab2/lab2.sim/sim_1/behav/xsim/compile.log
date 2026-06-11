@@ -1,0 +1,9 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module wordle_fsm
+INFO: [VRFC 10-311] analyzing module word_to_colour
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/g55wang/lab2_template/src/wordle_rom.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module wordle_rom
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/g55wang/lab2_template/src/wordle_top.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module wordle_top
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/g55wang/lab2_template/tb/wordle_top_tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module wordle_top_tb
