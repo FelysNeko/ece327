@@ -1,0 +1,15 @@
+12:23:06 INFO  : updated workspace path: 
+12:23:09 INFO  : Successfully created repository data at C:\Users\g55wang\AppData\Local\Temp\rigel_lopper_g55wang1412264832491955276
+12:23:09 INFO  : cmd.exe, /C, C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\activate.bat && python C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw\scripts\pyesw\\get_template_data.py -d C:\Users\g55wang\AppData\Local\Temp\rigel_lopper_g55wang6717615966045330136 -r C:\Users\g55wang\AppData\Local\Temp\rigel_lopper_g55wang1412264832491955276\.repo.yaml && C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\deactivate.bat
+12:23:10 INFO  : Embedded Template List generated successfully
+12:23:15 INFO  : connection terminated
+12:23:58 INFO  : cmd.exe, /C, C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\activate.bat && python C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw\scripts\pyesw\\repo.py -st  C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw && C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\deactivate.bat
+12:24:00 INFO  : Successfully created repository data at C:\Users\g55wang\AppData\Local\Temp\rigel_lopper_g55wang14188454650661500657
+12:24:00 INFO  : cmd.exe, /C, C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\activate.bat && python C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw\scripts\pyesw\\get_template_data.py -d C:\Users\g55wang\AppData\Local\Temp\rigel_lopper_g55wang8077565264971037618 -r C:\Users\g55wang\AppData\Local\Temp\rigel_lopper_g55wang14188454650661500657\.repo.yaml && C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\deactivate.bat
+12:24:00 INFO  : Embedded Template List generated successfully
+12:24:40 INFO  : cmd.exe, /C, C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\activate.bat && python C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw\scripts\pyesw\\repo.py -st  C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw && C:\Software\Xilinx\Vitis\2024.2\tps\win64\lopper-1.1.0\env\Scripts\deactivate.bat
+12:24:41 INFO  : Marking the target connection as default Local
+12:24:41 INFO  : Marking the target connection as default Linux Agent
+12:24:41 INFO  : Marking the target connection as default XRTServer
+12:24:41 INFO  : Marking the target connection as default LinuxEmulation
+12:24:41 INFO  : Marking the target connection as default QEMU

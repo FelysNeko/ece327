@@ -2,3 +2,6 @@ Running: xsim.dir/wordle_top_tb_behav/xsimk.exe -simmode gui -wdb wordle_top_tb_
 Design successfully loaded
 Design Loading Memory Usage: 41772 KB (Peak: 41772 KB)
 Design Loading CPU Usage: 515 ms
+Simulation completed
+Simulation Memory Usage: 42524 KB (Peak: 42524 KB)
+Simulation CPU Usage: 577 ms

@@ -3,13 +3,13 @@
 # SW Build 6060944 on Thu Mar 06 19:10:01 MST 2025
 # IP Build 6050500 on Thu Mar  6 23:33:39 MST 2025
 # SharedData Build 6060542 on Thu Mar 06 10:31:07 MST 2025
-# Start of session at: Thu Jun 11 10:42:52 2026
-# Process ID         : 14708
+# Start of session at: Fri Jun 12 11:36:09 2026
+# Process ID         : 15292
 # Current directory  : C:/Users/g55wang/lab2/lab2.runs/synth_1
 # Command line       : vivado.exe -log wordle_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source wordle_top.tcl
 # Log file           : C:/Users/g55wang/lab2/lab2.runs/synth_1/wordle_top.vds
 # Journal file       : C:/Users/g55wang/lab2/lab2.runs/synth_1\vivado.jou
-# Running On         : ECE-MCU2-05
+# Running On         : ECE-MCU2-21
 # Platform           : Windows Server 2016 or Windows 10
 # Operating System   : 26100
 # Processor Detail   : 12th Gen Intel(R) Core(TM) i7-12700H
@@ -19,6 +19,6 @@
 # Host memory        : 16892 MB
 # Swap memory        : 2550 MB
 # Total Virtual      : 19442 MB
-# Available Virtual  : 8270 MB
+# Available Virtual  : 8279 MB
 #-----------------------------------------------------------
 source wordle_top.tcl -notrace

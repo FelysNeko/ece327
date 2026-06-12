@@ -1,0 +1,4 @@
+domain_path: C:\Users\g55wang\lab2_system\lab2_system.sw\wordle_design_wrapper\export\wordle_design_wrapper\sw\standalone_psu_cortexa53_0
+app_src_dir: C:\Software\Xilinx\Vitis\2024.2\data\embeddedsw\lib\sw_apps\hello_world
+template: hello_world
+lang: c

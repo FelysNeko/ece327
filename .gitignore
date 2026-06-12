@@ -4,5 +4,12 @@
 !lab1_system/
 !lab2/
 !lab2_template/
+!lab2_system/
+
+!lab1/**
+!lab1_system/**
+!lab2/**
+!lab2_template/**
+!lab2_system/**
 
 !.gitignore

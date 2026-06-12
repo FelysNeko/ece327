@@ -90,6 +90,8 @@ read_xdc C:/Users/g55wang/lab2_template/constraints.xdc
 set_property used_in_implementation false [get_files C:/Users/g55wang/lab2_template/constraints.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental C:/Users/g55wang/lab2/lab2.srcs/utils_1/imports/synth_1/wordle_top.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }

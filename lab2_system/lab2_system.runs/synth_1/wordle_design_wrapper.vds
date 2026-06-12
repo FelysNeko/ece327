@@ -1,0 +1,313 @@
+#-----------------------------------------------------------
+# Vivado v2024.2.2 (64-bit)
+# SW Build 6060944 on Thu Mar 06 19:10:01 MST 2025
+# IP Build 6050500 on Thu Mar  6 23:33:39 MST 2025
+# SharedData Build 6060542 on Thu Mar 06 10:31:07 MST 2025
+# Start of session at: Fri Jun 12 12:06:39 2026
+# Process ID         : 16824
+# Current directory  : C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1
+# Command line       : vivado.exe -log wordle_design_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source wordle_design_wrapper.tcl
+# Log file           : C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/wordle_design_wrapper.vds
+# Journal file       : C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1\vivado.jou
+# Running On         : ECE-MCU2-21
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26100
+# Processor Detail   : 12th Gen Intel(R) Core(TM) i7-12700H
+# CPU Frequency      : 2688 MHz
+# CPU Physical cores : 14
+# CPU Logical cores  : 20
+# Host memory        : 16892 MB
+# Swap memory        : 12496 MB
+# Total Virtual      : 29388 MB
+# Available Virtual  : 14480 MB
+#-----------------------------------------------------------
+source wordle_design_wrapper.tcl -notrace
+create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 626.211 ; gain = 193.988
+INFO: [IP_Flow 19-234] Refreshing IP repositories
+INFO: [IP_Flow 19-1700] Loaded user IP repository 'c:/Users/g55wang/lab2/ip_repo'.
+INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Software/Xilinx/Vivado/2024.2/data/ip'.
+Command: synth_design -top wordle_design_wrapper -part xck26-sfvc784-2LV-c
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xck26'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xck26'
+INFO: [Device 21-403] Loading part xck26-sfvc784-2LV-c
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 4012
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1911.957 ; gain = 180.418
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_wrapper' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/hdl/wordle_design_wrapper.v:13]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:13]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_axi_smc_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_smc_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_axi_smc_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_smc_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'M00_AXI_awprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M00_AXI_arprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M01_AXI_awprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M01_AXI_arprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M02_AXI_awprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M02_AXI_arprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M03_AXI_awprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M03_AXI_arprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M04_AXI_awprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M04_AXI_arprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M05_AXI_awprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M05_AXI_arprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M06_AXI_awprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7071] port 'M06_AXI_arprot' of module 'wordle_design_axi_smc_0' is unconnected for instance 'axi_smc' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+WARNING: [Synth 8-7023] instance 'axi_smc' of module 'wordle_design_axi_smc_0' has 174 connections declared, but only 160 given [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:186]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_axi_gpio_6_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_6_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_axi_gpio_6_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_6_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_axi_gpio_5_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_5_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_axi_gpio_5_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_5_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_axi_gpio_2_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_2_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_axi_gpio_2_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_2_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_axi_gpio_1_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_1_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_axi_gpio_1_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_1_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_axi_gpio_3_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_3_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_axi_gpio_3_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_3_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_axi_gpio_0_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_axi_gpio_0_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_axi_gpio_4_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_4_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_axi_gpio_4_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_axi_gpio_4_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_rst_ps8_0_99M_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_rst_ps8_0_99M_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_rst_ps8_0_99M_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_rst_ps8_0_99M_0_stub.v:6]
+WARNING: [Synth 8-7071] port 'mb_reset' of module 'wordle_design_rst_ps8_0_99M_0' is unconnected for instance 'rst_ps8_0_99M' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:494]
+WARNING: [Synth 8-7071] port 'bus_struct_reset' of module 'wordle_design_rst_ps8_0_99M_0' is unconnected for instance 'rst_ps8_0_99M' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:494]
+WARNING: [Synth 8-7071] port 'peripheral_reset' of module 'wordle_design_rst_ps8_0_99M_0' is unconnected for instance 'rst_ps8_0_99M' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:494]
+WARNING: [Synth 8-7071] port 'interconnect_aresetn' of module 'wordle_design_rst_ps8_0_99M_0' is unconnected for instance 'rst_ps8_0_99M' [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:494]
+WARNING: [Synth 8-7023] instance 'rst_ps8_0_99M' of module 'wordle_design_rst_ps8_0_99M_0' has 10 connections declared, but only 6 given [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:494]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_wordle_top_0_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_wordle_top_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_wordle_top_0_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_wordle_top_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'wordle_design_zynq_ultra_ps_e_0_0' [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_zynq_ultra_ps_e_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_zynq_ultra_ps_e_0_0' (0#1) [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/.Xil/Vivado-16824-ECE-MCU2-21/realtime/wordle_design_zynq_ultra_ps_e_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design' (0#1) [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/synth/wordle_design.v:13]
+INFO: [Synth 8-6155] done synthesizing module 'wordle_design_wrapper' (0#1) [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/hdl/wordle_design_wrapper.v:13]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2024.043 ; gain = 292.504
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2024.043 ; gain = 292.504
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 2024.043 ; gain = 292.504
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 2024.043 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_zynq_ultra_ps_e_0_0/wordle_design_zynq_ultra_ps_e_0_0/wordle_design_zynq_ultra_ps_e_0_0_in_context.xdc] for cell 'wordle_design_i/zynq_ultra_ps_e_0'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_zynq_ultra_ps_e_0_0/wordle_design_zynq_ultra_ps_e_0_0/wordle_design_zynq_ultra_ps_e_0_0_in_context.xdc] for cell 'wordle_design_i/zynq_ultra_ps_e_0'
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_wordle_top_0_0/wordle_design_wordle_top_0_0/wordle_design_wordle_top_0_0_in_context.xdc] for cell 'wordle_design_i/wordle_top_0'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_wordle_top_0_0/wordle_design_wordle_top_0_0/wordle_design_wordle_top_0_0_in_context.xdc] for cell 'wordle_design_i/wordle_top_0'
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_0_0/wordle_design_axi_gpio_0_0/wordle_design_axi_gpio_0_0_in_context.xdc] for cell 'wordle_design_i/ref_word_idx'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_0_0/wordle_design_axi_gpio_0_0/wordle_design_axi_gpio_0_0_in_context.xdc] for cell 'wordle_design_i/ref_word_idx'
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_1_0/wordle_design_axi_gpio_1_0/wordle_design_axi_gpio_1_0_in_context.xdc] for cell 'wordle_design_i/guess_word'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_1_0/wordle_design_axi_gpio_1_0/wordle_design_axi_gpio_1_0_in_context.xdc] for cell 'wordle_design_i/guess_word'
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_2_0/wordle_design_axi_gpio_2_0/wordle_design_axi_gpio_2_0_in_context.xdc] for cell 'wordle_design_i/guess_id'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_2_0/wordle_design_axi_gpio_2_0/wordle_design_axi_gpio_2_0_in_context.xdc] for cell 'wordle_design_i/guess_id'
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_3_0/wordle_design_axi_gpio_3_0/wordle_design_axi_gpio_3_0_in_context.xdc] for cell 'wordle_design_i/ready'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_3_0/wordle_design_axi_gpio_3_0/wordle_design_axi_gpio_3_0_in_context.xdc] for cell 'wordle_design_i/ready'
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_4_0/wordle_design_axi_gpio_4_0/wordle_design_axi_gpio_4_0_in_context.xdc] for cell 'wordle_design_i/result'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_4_0/wordle_design_axi_gpio_4_0/wordle_design_axi_gpio_4_0_in_context.xdc] for cell 'wordle_design_i/result'
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_5_0/wordle_design_axi_gpio_5_0/wordle_design_axi_gpio_5_0_in_context.xdc] for cell 'wordle_design_i/guess_count'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_5_0/wordle_design_axi_gpio_5_0/wordle_design_axi_gpio_5_0_in_context.xdc] for cell 'wordle_design_i/guess_count'
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_6_0/wordle_design_axi_gpio_6_0/wordle_design_axi_gpio_6_0_in_context.xdc] for cell 'wordle_design_i/game_status'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_gpio_6_0/wordle_design_axi_gpio_6_0/wordle_design_axi_gpio_6_0_in_context.xdc] for cell 'wordle_design_i/game_status'
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_smc_0/wordle_design_axi_smc_0/wordle_design_axi_smc_0_in_context.xdc] for cell 'wordle_design_i/axi_smc'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_axi_smc_0/wordle_design_axi_smc_0/wordle_design_axi_smc_0_in_context.xdc] for cell 'wordle_design_i/axi_smc'
+Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_rst_ps8_0_99M_0/wordle_design_rst_ps8_0_99M_0/wordle_design_rst_ps8_0_99M_0_in_context.xdc] for cell 'wordle_design_i/rst_ps8_0_99M'
+Finished Parsing XDC File [c:/Users/g55wang/lab2_system/lab2_system.gen/sources_1/bd/wordle_design/ip/wordle_design_rst_ps8_0_99M_0/wordle_design_rst_ps8_0_99M_0/wordle_design_rst_ps8_0_99M_0_in_context.xdc] for cell 'wordle_design_i/rst_ps8_0_99M'
+Parsing XDC File [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/dont_touch.xdc]
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2028.578 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 2028.578 ; gain = 0.000
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2028.578 ; gain = 297.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xck26-sfvc784-2LV-c
+INFO: [Synth 8-6742] Reading net delay rules and data
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2028.578 ; gain = 297.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/zynq_ultra_ps_e_0. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/wordle_top_0. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/ref_word_idx. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/guess_word. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/guess_id. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/ready. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/result. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/guess_count. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/game_status. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/axi_smc. (constraint file  auto generated constraint).
+Applied set_property KEEP_HIERARCHY = SOFT for wordle_design_i/rst_ps8_0_99M. (constraint file  auto generated constraint).
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2028.578 ; gain = 297.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:15 . Memory (MB): peak = 2028.578 ; gain = 297.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 1248 (col length:96)
+BRAMs: 288 (col length: RAMB18 96 RAMB36 48)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 2028.578 ; gain = 297.039
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 2735.691 ; gain = 1004.152
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 2735.691 ; gain = 1004.152
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:25 ; elapsed = 00:00:27 . Memory (MB): peak = 2746.449 ; gain = 1014.910
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2962.324 ; gain = 1230.785
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2962.324 ; gain = 1230.785
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2962.324 ; gain = 1230.785
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2962.324 ; gain = 1230.785
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2962.324 ; gain = 1230.785
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2962.324 ; gain = 1230.785
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+----------------------------------+----------+
+|      |BlackBox name                     |Instances |
++------+----------------------------------+----------+
+|1     |wordle_design_axi_smc_0           |         1|
+|2     |wordle_design_axi_gpio_6_0        |         1|
+|3     |wordle_design_axi_gpio_5_0        |         1|
+|4     |wordle_design_axi_gpio_2_0        |         1|
+|5     |wordle_design_axi_gpio_1_0        |         1|
+|6     |wordle_design_axi_gpio_3_0        |         1|
+|7     |wordle_design_axi_gpio_0_0        |         1|
+|8     |wordle_design_axi_gpio_4_0        |         1|
+|9     |wordle_design_rst_ps8_0_99M_0     |         1|
+|10    |wordle_design_wordle_top_0_0      |         1|
+|11    |wordle_design_zynq_ultra_ps_e_0_0 |         1|
++------+----------------------------------+----------+
+
+Report Cell Usage: 
++------+--------------------------------+------+
+|      |Cell                            |Count |
++------+--------------------------------+------+
+|1     |wordle_design_axi_gpio_0        |     1|
+|2     |wordle_design_axi_gpio_1        |     1|
+|3     |wordle_design_axi_gpio_2        |     1|
+|4     |wordle_design_axi_gpio_3        |     1|
+|5     |wordle_design_axi_gpio_4        |     1|
+|6     |wordle_design_axi_gpio_5        |     1|
+|7     |wordle_design_axi_gpio_6        |     1|
+|8     |wordle_design_axi_smc           |     1|
+|9     |wordle_design_rst_ps8_0_99M     |     1|
+|10    |wordle_design_wordle_top_0      |     1|
+|11    |wordle_design_zynq_ultra_ps_e_0 |     1|
++------+--------------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:28 ; elapsed = 00:00:29 . Memory (MB): peak = 2962.324 ; gain = 1230.785
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:18 ; elapsed = 00:00:25 . Memory (MB): peak = 2962.324 ; gain = 1226.250
+Synthesis Optimization Complete : Time (s): cpu = 00:00:28 ; elapsed = 00:00:30 . Memory (MB): peak = 2962.324 ; gain = 1230.785
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 2962.324 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2962.324 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete | Checksum: f95878de
+INFO: [Common 17-83] Releasing license: Synthesis
+42 Infos, 21 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:32 ; elapsed = 00:00:38 . Memory (MB): peak = 2962.324 ; gain = 2271.824
+INFO: [Common 17-1381] The checkpoint 'C:/Users/g55wang/lab2_system/lab2_system.runs/synth_1/wordle_design_wrapper.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file wordle_design_wrapper_utilization_synth.rpt -pb wordle_design_wrapper_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Fri Jun 12 12:07:31 2026...
