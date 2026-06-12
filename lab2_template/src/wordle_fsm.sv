@@ -70,12 +70,11 @@ always_ff @(posedge clk) begin
     end else begin
         case (r_state)
             S_READY: begin
-                // Once the game ends, do not accept guesses until software sends guess_id = 0.
+                // Once the game ends, do not accept guesses until guess_id = 0.
                 if (r_game_status != ONGOING) begin
                     r_ready <= 1'b0;
 
                     if (i_guess_id == '0) begin
-                        // Start a new game and register the new reference word.
                         r_ref_word      <= i_ref_word;
                         r_guess_word    <= '0;
                         r_last_guess_id <= '0;
@@ -90,23 +89,20 @@ always_ff @(posedge clk) begin
                 end else begin
                     r_ready <= 1'b1;
 
-                    // Initial/new-game idle condition: keep registering the reference word
+                    // idle condition
                     // while guess_id is 0 and no guesses have been accepted yet.
                     if ((i_guess_id == '0) && (r_guess_count == '0) && (r_last_guess_id == '0)) begin
                         r_ref_word <= i_ref_word;
                     end
 
-                    // Accept a guess only when its ID is strictly higher than the previous ID.
+                    // Accept a guess only when its ID is higher than the previous ID.
                     if ((i_guess_id != '0) && (i_guess_id > r_last_guess_id)) begin
-                        // Register the guess word and ID. i_guess_word is not assumed stable
-                        // after this turn starts.
                         r_guess_word    <= i_guess_word;
                         r_last_guess_id <= i_guess_id;
                         r_ready         <= 1'b0;
                         r_state         <= S_SCORE;
 
-                        // Also capture the reference on the first accepted guess. This makes
-                        // the design robust if software moves directly from guess_id 0 to 1.
+                        
                         if (r_guess_count == '0) begin
                             r_ref_word <= i_ref_word;
                         end
@@ -115,7 +111,7 @@ always_ff @(posedge clk) begin
             end
 
             S_SCORE: begin
-                // Store the result produced from the registered ref/guess words.
+                // Store the result produced from the registered
                 for (k = 0; k < NUM_LETTERS; k = k + 1) begin
                     case (w_colour_result[k*2+:2])
                         2'b01:   r_result[k] <= GREEN;
@@ -208,7 +204,7 @@ module word_to_colour #(
             o_result[(NUM_LETTERS-1-ci)*2 +: 2] = GREY_C;
         end
 
-        // Pass 1: exact-position matches are GREEN and consume that reference letter.
+        // exact-position matches are GREEN and consume that reference letter.
         for (ci = 0; ci < NUM_LETTERS; ci = ci + 1) begin
             if (guess_letter[ci] == ref_letter[ci]) begin
                 o_result[(NUM_LETTERS-1-ci)*2 +: 2] = GREEN_C;
@@ -217,9 +213,8 @@ module word_to_colour #(
             end
         end
 
-        // Pass 2: misplaced matches are YELLOW. Scan guess from right to left so
-        // if a repeated guess letter maps to only one remaining reference letter,
-        // the last occurrence is the one marked yellow.
+        // misplaced matches are YELLOW
+        // only the last occurrence is marked yellow
         for (gi = NUM_LETTERS; gi > 0; gi = gi - 1) begin
             g = gi - 1;
             found = 1'b0;

@@ -9,11 +9,11 @@ Completed static elaboration
 Starting simulation data flow analysis
 WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_top.sv" Line 10. Module wordle_top_default doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" Line 7. Module wordle_fsm_default doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" Line 174. Module word_to_colour(WORD_WIDTH=32,RSLT_WIDTH=8) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" Line 170. Module word_to_colour(WORD_WIDTH=32,RSLT_WIDTH=8) doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_rom.sv" Line 13. Module wordle_rom doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_top.sv" Line 10. Module wordle_top_default doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" Line 7. Module wordle_fsm_default doesn't have a timescale but at least one module in design has a timescale.
-WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" Line 174. Module word_to_colour(WORD_WIDTH=32,RSLT_WIDTH=8) doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_fsm.sv" Line 170. Module word_to_colour(WORD_WIDTH=32,RSLT_WIDTH=8) doesn't have a timescale but at least one module in design has a timescale.
 WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab2_template/src/wordle_rom.sv" Line 13. Module wordle_rom doesn't have a timescale but at least one module in design has a timescale.
 Completed simulation data flow analysis
 Time Resolution for simulation is 1ps
