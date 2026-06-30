@@ -1,7 +1,7 @@
-Running: xsim.dir/wordle_top_tb_behav/xsimk.exe -simmode gui -wdb wordle_top_tb_behav.wdb -simrunnum 0 -socket 56286
+Running: xsim.dir/wordle_top_tb_behav/xsimk.exe -simmode gui -wdb wordle_top_tb_behav.wdb -simrunnum 0 -socket 49693
 Design successfully loaded
-Design Loading Memory Usage: 41772 KB (Peak: 41772 KB)
-Design Loading CPU Usage: 515 ms
+Design Loading Memory Usage: 41844 KB (Peak: 41844 KB)
+Design Loading CPU Usage: 531 ms
 Simulation completed
-Simulation Memory Usage: 42524 KB (Peak: 42524 KB)
+Simulation Memory Usage: 42444 KB (Peak: 42444 KB)
 Simulation CPU Usage: 577 ms

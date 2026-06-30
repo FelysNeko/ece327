@@ -1,0 +1,85 @@
+Time resolution is 1 ps
+----------------------------------------
+Test 1: normal game, registered guess, WIN, restart after WIN
+Test 1 Round 1: ref=furl, guess=farm, then input changed to furl
+Got:      result=01000100 count=1 status=00 ready=1
+Expected: result=01000100 count=1 status=00 ready=1
+Test 1 Round 1 correct.
+Test 1 Round 2: ref=furl, guess=fury
+Got:      result=01010100 count=2 status=00 ready=1
+Expected: result=01010100 count=2 status=00 ready=1
+Test 1 Round 2 correct.
+Test 1 Round 3: ref=furl, guess=furl
+Got:      result=01010101 count=3 status=11 ready=0
+Expected: result=01010101 count=3 status=11 ready=0
+Test 1 Round 3 correct.
+Test 1 after WIN: guess=aaaa should be ignored
+Got:      result=01010101 count=3 status=11 ready=0
+Expected: result=01010101 count=3 status=11 ready=0
+Test 1 after WIN correct.
+Test 1 restart after WIN with guess_id=0
+Got:      count=0 status=00 ready=1
+Expected: count=0 status=00 ready=1
+Test 1 restart after WIN correct.
+----------------------------------------
+Test 2: same guess_id ignored and reference word locked
+Test 2 Round 1: ref=furl, guess=farm
+Got:      result=01000100 count=1 status=00 ready=1
+Expected: result=01000100 count=1 status=00 ready=1
+Test 2 Round 1 correct.
+Test 2 same ID: guess=furl, guess_id still 1
+Got:      result=01000100 count=1 status=00 ready=1
+Expected: result=01000100 count=1 status=00 ready=1
+Test 2 same ID correct.
+Test 2 ref lock: original ref=furl, ROM changed to loop, guess=loop
+Got:      result=10000000 count=2 status=00 ready=1
+Expected: result=10000000 count=2 status=00 ready=1
+Test 2 ref lock correct.
+----------------------------------------
+Test 3: last repeated guess letter becomes yellow
+Test 3: ref=furl, guess=llaa
+Got:      result=00100000 count=1 status=00 ready=1
+Expected: result=00100000 count=1 status=00 ready=1
+Test 3 correct.
+----------------------------------------
+Test 4: green matches consume letters before yellow matches
+Test 4: ref=cool, guess=loll
+Got:      result=00010001 count=1 status=00 ready=1
+Expected: result=00010001 count=1 status=00 ready=1
+Test 4 correct.
+----------------------------------------
+Test 5: lose on 6th wrong guess and restart after LOSE
+Test 5 Round 1: ref=skew, guess=aaaa
+Got:      result=00000000 count=1 status=00 ready=1
+Expected: result=00000000 count=1 status=00 ready=1
+Test 5 Round 1 correct.
+Test 5 Round 2: ref=skew, guess=aaaa
+Got:      result=00000000 count=2 status=00 ready=1
+Expected: result=00000000 count=2 status=00 ready=1
+Test 5 Round 2 correct.
+Test 5 Round 3: ref=skew, guess=aaaa
+Got:      result=00000000 count=3 status=00 ready=1
+Expected: result=00000000 count=3 status=00 ready=1
+Test 5 Round 3 correct.
+Test 5 Round 4: ref=skew, guess=aaaa
+Got:      result=00000000 count=4 status=00 ready=1
+Expected: result=00000000 count=4 status=00 ready=1
+Test 5 Round 4 correct.
+Test 5 Round 5: ref=skew, guess=aaaa
+Got:      result=00000000 count=5 status=00 ready=1
+Expected: result=00000000 count=5 status=00 ready=1
+Test 5 Round 5 correct.
+Test 5 Round 6: ref=skew, guess=aaaa
+Got:      result=00000000 count=6 status=10 ready=0
+Expected: result=00000000 count=6 status=10 ready=0
+Test 5 Round 6 correct.
+Test 5 restart after LOSE with guess_id=0
+Got:      count=0 status=00 ready=1
+Expected: count=0 status=00 ready=1
+Test 5 restart after LOSE correct.
+Test 5 restarted game: ref=furl, guess=furl
+Got:      result=01010101 count=1 status=11 ready=0
+Expected: result=01010101 count=1 status=11 ready=0
+Test 5 restarted game correct.
+TEST PASSED!
+$stop called at time : 312 ns : File "C:/Users/g55wang/lab2_template/tb/wordle_top_tb.sv" Line 442
