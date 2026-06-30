@@ -26,66 +26,177 @@ localparam signed [13:0] A4 = 14'b11111111011100; // a4 = -0.0087890625
 
 
 /******* Your code starts here *******/
-logic r_o_valid;
-logic r_i_valid; 
-logic signed [13:0] r_o_fx;
-logic signed [13:0] fx;
-logic signed [13:0] r_i_x;
 
-logic signed [13:0] x_squared;
-logic signed [13:0] x_cubed;
-logic signed [13:0] p1, p2, p3, p4;
 
-logic signed [27:0] mult_x2;
-logic signed [27:0] mult_x3;
-logic signed [27:0] mult1, mult2, mult3, mult4, mult5;
+logic signed [13:0] i_x_s;
+assign i_x_s = i_x;
 
-always_comb begin
-    // x_squared = x * x
-    // Q2.12 * Q2.12 = Q4.24, so >>> 12 brings it back to Q2.12
-    mult_x2  = r_i_x * r_i_x;
-    x_squared = mult_x2 >>> 12;
+// Simple back-pressure: freeze the whole pipeline when downstream is not ready.
+assign o_ready = i_ready;
+logic pipe_en;
+assign pipe_en = i_ready;
 
-    // x_cubed = x_squared * x
-    mult_x3 = x_squared * r_i_x;
-    x_cubed = mult_x3 >>> 12;
+// Valid pipeline.  v13 drives o_valid.
+logic v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13;
 
-    // Horner chain:
-    // ((((A4*x^2 + A3)*x^2 + A2)*x^2 + A1)*x^2 + A0)*x^3 + x
+// Stage 0: input register.
+logic signed [13:0] s0_x;
 
-    mult1 = A4 * x_squared;
-    p1 = (mult1 >>> 12) + A3;
+// Stage 1: full product for x^2.
+logic signed [13:0] s1_x;
+(* use_dsp = "yes" *) logic signed [27:0] s1_x2_prod;
 
-    mult2 = p1 * x_squared;
-    p2 = (mult2 >>> 12) + A2;
+// Stage 2: truncated x^2.
+logic signed [13:0] s2_x;
+logic signed [13:0] s2_x2;
 
-    mult3 = p2 * x_squared;
-    p3 = (mult3 >>> 12) + A1;
+// Stage 3: products for x^3 and p1 numerator.
+logic signed [13:0] s3_x;
+logic signed [13:0] s3_x2;
+(* use_dsp = "yes" *) logic signed [27:0] s3_x3_prod;
+(* use_dsp = "yes" *) logic signed [27:0] s3_p1_prod;
 
-    mult4 = p3 * x_squared;
-    p4 = (mult4 >>> 12) + A0;
+// Stage 4: truncated x^3 and p1.
+logic signed [13:0] s4_x;
+logic signed [13:0] s4_x2;
+logic signed [13:0] s4_x3;
+logic signed [13:0] s4_p1;
 
-    mult5 = p4 * x_cubed;
-    fx = (mult5 >>> 12) + r_i_x;
-end
+// Stage 5/6: p2 product, then p2 add/truncate.
+logic signed [13:0] s5_x;
+logic signed [13:0] s5_x2;
+logic signed [13:0] s5_x3;
+(* use_dsp = "yes" *) logic signed [27:0] s5_p2_prod;
+
+logic signed [13:0] s6_x;
+logic signed [13:0] s6_x2;
+logic signed [13:0] s6_x3;
+logic signed [13:0] s6_p2;
+
+// Stage 7/8: p3 product, then p3 add/truncate.
+logic signed [13:0] s7_x;
+logic signed [13:0] s7_x2;
+logic signed [13:0] s7_x3;
+(* use_dsp = "yes" *) logic signed [27:0] s7_p3_prod;
+
+logic signed [13:0] s8_x;
+logic signed [13:0] s8_x2;
+logic signed [13:0] s8_x3;
+logic signed [13:0] s8_p3;
+
+// Stage 9/10: p4 product, then p4 add/truncate.
+logic signed [13:0] s9_x;
+logic signed [13:0] s9_x3;
+(* use_dsp = "yes" *) logic signed [27:0] s9_p4_prod;
+
+logic signed [13:0] s10_x;
+logic signed [13:0] s10_x3;
+logic signed [13:0] s10_p4;
+
+// Stage 11/12: final product, then final term truncate.
+logic signed [13:0] s11_x;
+(* use_dsp = "yes" *) logic signed [27:0] s11_term_prod;
+
+logic signed [13:0] s12_x;
+logic signed [13:0] s12_term;
+
+// Stage 13: final add.
+logic signed [13:0] s13_fx;
 
 always_ff @(posedge clk) begin
     if (rst) begin
-        r_o_valid <= 1'b0;
-        r_i_valid <= 1'b0;
-        r_o_fx    <= '0;
-        r_i_x     <= '0;
-    end else if (i_ready) begin
-        r_i_x     <= i_x;
-        r_i_valid <= i_valid;
-        r_o_valid <= r_i_valid;
-        r_o_fx    <= fx;
+        v0  <= 1'b0; v1  <= 1'b0; v2  <= 1'b0; v3  <= 1'b0;
+        v4  <= 1'b0; v5  <= 1'b0; v6  <= 1'b0; v7  <= 1'b0;
+        v8  <= 1'b0; v9  <= 1'b0; v10 <= 1'b0; v11 <= 1'b0;
+        v12 <= 1'b0; v13 <= 1'b0;
+        s13_fx <= '0;
+    end else if (pipe_en) begin
+        // Stage 0: input register.
+        s0_x <= i_x_s;
+        v0   <= i_valid;
+
+        // Stage 1: x^2 product only.
+        s1_x       <= s0_x;
+        s1_x2_prod <= s0_x * s0_x;
+        v1         <= v0;
+
+        // Stage 2: truncate x^2 back to Q2.12.
+        s2_x  <= s1_x;
+        s2_x2 <= s1_x2_prod >>> 12;
+        v2    <= v1;
+
+        // Stage 3: products only.
+        s3_x       <= s2_x;
+        s3_x2      <= s2_x2;
+        s3_x3_prod <= s2_x2 * s2_x;
+        s3_p1_prod <= A4 * s2_x2;
+        v3         <= v2;
+
+        // Stage 4: truncate/add.
+        s4_x  <= s3_x;
+        s4_x2 <= s3_x2;
+        s4_x3 <= s3_x3_prod >>> 12;
+        s4_p1 <= (s3_p1_prod >>> 12) + A3;
+        v4    <= v3;
+
+        // Stage 5: p2 product only.
+        s5_x       <= s4_x;
+        s5_x2      <= s4_x2;
+        s5_x3      <= s4_x3;
+        s5_p2_prod <= s4_p1 * s4_x2;
+        v5         <= v4;
+
+        // Stage 6: truncate/add p2.
+        s6_x  <= s5_x;
+        s6_x2 <= s5_x2;
+        s6_x3 <= s5_x3;
+        s6_p2 <= (s5_p2_prod >>> 12) + A2;
+        v6    <= v5;
+
+        // Stage 7: p3 product only.
+        s7_x       <= s6_x;
+        s7_x2      <= s6_x2;
+        s7_x3      <= s6_x3;
+        s7_p3_prod <= s6_p2 * s6_x2;
+        v7         <= v6;
+
+        // Stage 8: truncate/add p3.
+        s8_x  <= s7_x;
+        s8_x2 <= s7_x2;
+        s8_x3 <= s7_x3;
+        s8_p3 <= (s7_p3_prod >>> 12) + A1;
+        v8    <= v7;
+
+        // Stage 9: p4 product only.
+        s9_x       <= s8_x;
+        s9_x3      <= s8_x3;
+        s9_p4_prod <= s8_p3 * s8_x2;
+        v9         <= v8;
+
+        // Stage 10: truncate/add p4.
+        s10_x  <= s9_x;
+        s10_x3 <= s9_x3;
+        s10_p4 <= (s9_p4_prod >>> 12) + A0;
+        v10    <= v9;
+
+        // Stage 11: final product only.
+        s11_x         <= s10_x;
+        s11_term_prod <= s10_p4 * s10_x3;
+        v11           <= v10;
+
+        // Stage 12: truncate final product.
+        s12_x    <= s11_x;
+        s12_term <= s11_term_prod >>> 12;
+        v12      <= v11;
+
+        // Stage 13: final add.
+        s13_fx <= s12_term + s12_x;
+        v13    <= v12;
     end
 end
 
-assign o_valid = r_o_valid;
-assign o_ready = i_ready;
-assign o_fx    = r_o_fx;
+assign o_valid = v13;
+assign o_fx    = s13_fx;
 /******* Your code ends here ********/
 
 
