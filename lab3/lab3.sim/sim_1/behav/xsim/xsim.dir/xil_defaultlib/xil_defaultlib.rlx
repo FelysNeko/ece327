@@ -1,0 +1,7 @@
+0.7
+2020.2
+Mar  6 2025
+19:11:35
+C:/Users/g55wang/lab3/lab3.sim/sim_1/behav/xsim/glbl.v,1734094861,verilog,,,,glbl,,uvm,,,,,,
+C:/Users/g55wang/lab3_template/src/tanh.sv,1783110032,systemVerilog,,C:/Users/g55wang/lab3_template/tb/tanh_tb.sv,,bit_delay;q212_delay;q212_dsp_muladd;tanh,,uvm,,,,,,
+C:/Users/g55wang/lab3_template/tb/tanh_tb.sv,1782851660,systemVerilog,,,,tanh_tb,,uvm,,,,,,

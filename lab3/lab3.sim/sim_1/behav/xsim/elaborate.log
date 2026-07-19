@@ -1,0 +1,69 @@
+Vivado Simulator v2024.2.2
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Running: C:/Software/Xilinx/Vivado/2024.2/bin/unwrapped/win64.o/xelab.exe --incr --debug typical --relax --mt 2 -L xil_defaultlib -L uvm -L unisims_ver -L unimacro_ver -L secureip --snapshot tanh_tb_behav xil_defaultlib.tanh_tb xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+Completed static elaboration
+Starting simulation data flow analysis
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 7. Module tanh doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 7. Module tanh doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 410. Module q212_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 288. Module q212_dsp_muladd doesn't have a timescale but at least one module in design has a timescale.
+WARNING: [XSIM 43-4099] "C:/Users/g55wang/lab3_template/src/tanh.sv" Line 439. Module bit_delay doesn't have a timescale but at least one module in design has a timescale.
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling module unisims_ver.DSP48E2(ACASCREG=2,ADREG=0,AREG=...
+Compiling module xil_defaultlib.q212_dsp_muladd
+Compiling module xil_defaultlib.q212_delay
+Compiling module xil_defaultlib.bit_delay
+Compiling module xil_defaultlib.tanh
+Compiling module xil_defaultlib.tanh_tb
+Compiling module xil_defaultlib.glbl
+Built simulation snapshot tanh_tb_behav

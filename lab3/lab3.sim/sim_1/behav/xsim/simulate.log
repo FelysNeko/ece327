@@ -1,0 +1,46 @@
+Time resolution is 1 ps
+[304.00 ns] SUCCESS	 x= -0.678711	 Real Tanh(x)= -0.590681	 Taylor Tanh(x)= -0.590662	 o_fx= -0.590820	 Error:  0.000159	 <  0.001000
+[308.00 ns] SUCCESS	 x= -0.600830	 Real Tanh(x)= -0.537640	 Taylor Tanh(x)= -0.537636	 o_fx= -0.537598	 Error:  0.000039	 <  0.001000
+[312.00 ns] SUCCESS	 x=  0.274658	 Real Tanh(x)=  0.267954	 Taylor Tanh(x)=  0.267954	 o_fx=  0.267822	 Error:  0.000132	 <  0.001000
+[316.00 ns] SUCCESS	 x=  0.815674	 Real Tanh(x)=  0.672708	 Taylor Tanh(x)=  0.672509	 o_fx=  0.672363	 Error:  0.000146	 <  0.001000
+[320.00 ns] SUCCESS	 x=  0.495361	 Real Tanh(x)=  0.458461	 Taylor Tanh(x)=  0.458461	 o_fx=  0.458496	 Error:  0.000035	 <  0.001000
+[324.00 ns] SUCCESS	 x= -0.701660	 Real Tanh(x)= -0.605420	 Taylor Tanh(x)= -0.605391	 o_fx= -0.605469	 Error:  0.000078	 <  0.001000
+[328.00 ns] SUCCESS	 x= -0.506592	 Real Tanh(x)= -0.467285	 Taylor Tanh(x)= -0.467285	 o_fx= -0.467285	 Error:  0.000000	 <  0.001000
+[332.00 ns] SUCCESS	 x=  0.722412	 Real Tanh(x)=  0.618401	 Taylor Tanh(x)=  0.618358	 o_fx=  0.618164	 Error:  0.000194	 <  0.001000
+[336.00 ns] SUCCESS	 x= -0.318359	 Real Tanh(x)= -0.308023	 Taylor Tanh(x)= -0.308023	 o_fx= -0.308105	 Error:  0.000083	 <  0.001000
+[340.00 ns] SUCCESS	 x= -0.453857	 Real Tanh(x)= -0.425065	 Taylor Tanh(x)= -0.425065	 o_fx= -0.425049	 Error:  0.000016	 <  0.001000
+[348.00 ns] SUCCESS	 x=  0.070312	 Real Tanh(x)=  0.070197	 Taylor Tanh(x)=  0.070197	 o_fx=  0.070068	 Error:  0.000128	 <  0.001000
+[352.00 ns] SUCCESS	 x= -0.088379	 Real Tanh(x)= -0.088150	 Taylor Tanh(x)= -0.088150	 o_fx= -0.088379	 Error:  0.000229	 <  0.001000
+[356.00 ns] SUCCESS	 x= -0.604736	 Real Tanh(x)= -0.540411	 Taylor Tanh(x)= -0.540407	 o_fx= -0.540527	 Error:  0.000120	 <  0.001000
+[360.00 ns] SUCCESS	 x=  0.625488	 Real Tanh(x)=  0.554938	 Taylor Tanh(x)=  0.554931	 o_fx=  0.554688	 Error:  0.000244	 <  0.001000
+[364.00 ns] SUCCESS	 x= -0.824463	 Real Tanh(x)= -0.677492	 Taylor Tanh(x)= -0.677263	 o_fx= -0.677246	 Error:  0.000017	 <  0.001000
+[368.00 ns] SUCCESS	 x=  0.674316	 Real Tanh(x)=  0.587812	 Taylor Tanh(x)=  0.587794	 o_fx=  0.587646	 Error:  0.000148	 <  0.001000
+[376.00 ns] SUCCESS	 x= -0.783203	 Real Tanh(x)= -0.654541	 Taylor Tanh(x)= -0.654422	 o_fx= -0.654297	 Error:  0.000125	 <  0.001000
+[380.00 ns] SUCCESS	 x=  0.356934	 Real Tanh(x)=  0.342510	 Taylor Tanh(x)=  0.342510	 o_fx=  0.342529	 Error:  0.000019	 <  0.001000
+[384.00 ns] SUCCESS	 x=  0.170898	 Real Tanh(x)=  0.169254	 Taylor Tanh(x)=  0.169254	 o_fx=  0.169189	 Error:  0.000064	 <  0.001000
+[388.00 ns] SUCCESS	 x= -0.097412	 Real Tanh(x)= -0.097105	 Taylor Tanh(x)= -0.097105	 o_fx= -0.097168	 Error:  0.000063	 <  0.001000
+[392.00 ns] SUCCESS	 x=  0.014404	 Real Tanh(x)=  0.014403	 Taylor Tanh(x)=  0.014403	 o_fx=  0.014404	 Error:  0.000001	 <  0.001000
+[396.00 ns] SUCCESS	 x= -0.307373	 Real Tanh(x)= -0.298045	 Taylor Tanh(x)= -0.298045	 o_fx= -0.298096	 Error:  0.000050	 <  0.001000
+[400.00 ns] SUCCESS	 x=  0.461426	 Real Tanh(x)=  0.431246	 Taylor Tanh(x)=  0.431246	 o_fx=  0.431152	 Error:  0.000093	 <  0.001000
+[404.00 ns] SUCCESS	 x=  0.097412	 Real Tanh(x)=  0.097105	 Taylor Tanh(x)=  0.097105	 o_fx=  0.097168	 Error:  0.000063	 <  0.001000
+[408.00 ns] SUCCESS	 x=  0.413818	 Real Tanh(x)=  0.391710	 Taylor Tanh(x)=  0.391710	 o_fx=  0.391602	 Error:  0.000109	 <  0.001000
+[416.00 ns] SUCCESS	 x= -0.947510	 Real Tanh(x)= -0.738654	 Taylor Tanh(x)= -0.737348	 o_fx= -0.737061	 Error:  0.000288	 <  0.001000
+[424.00 ns] SUCCESS	 x= -0.345947	 Real Tanh(x)= -0.332776	 Taylor Tanh(x)= -0.332777	 o_fx= -0.332764	 Error:  0.000013	 <  0.001000
+[428.00 ns] SUCCESS	 x= -0.969238	 Real Tanh(x)= -0.748369	 Taylor Tanh(x)= -0.746638	 o_fx= -0.746338	 Error:  0.000300	 <  0.001000
+[432.00 ns] SUCCESS	 x= -0.054932	 Real Tanh(x)= -0.054876	 Taylor Tanh(x)= -0.054876	 o_fx= -0.054932	 Error:  0.000055	 <  0.001000
+[436.00 ns] SUCCESS	 x= -0.470703	 Real Tanh(x)= -0.438767	 Taylor Tanh(x)= -0.438767	 o_fx= -0.438965	 Error:  0.000198	 <  0.001000
+[444.00 ns] SUCCESS	 x=  0.532715	 Real Tanh(x)=  0.487454	 Taylor Tanh(x)=  0.487453	 o_fx=  0.487305	 Error:  0.000148	 <  0.001000
+[448.00 ns] SUCCESS	 x=  0.623535	 Real Tanh(x)=  0.553585	 Taylor Tanh(x)=  0.553578	 o_fx=  0.553467	 Error:  0.000112	 <  0.001000
+[452.00 ns] SUCCESS	 x= -0.710205	 Real Tanh(x)= -0.610805	 Taylor Tanh(x)= -0.610771	 o_fx= -0.610840	 Error:  0.000069	 <  0.001000
+[456.00 ns] SUCCESS	 x=  0.398193	 Real Tanh(x)=  0.378402	 Taylor Tanh(x)=  0.378402	 o_fx=  0.378418	 Error:  0.000016	 <  0.001000
+[460.00 ns] SUCCESS	 x=  0.424561	 Real Tanh(x)=  0.400765	 Taylor Tanh(x)=  0.400766	 o_fx=  0.400635	 Error:  0.000131	 <  0.001000
+[464.00 ns] SUCCESS	 x= -0.927490	 Real Tanh(x)= -0.729422	 Taylor Tanh(x)= -0.728422	 o_fx= -0.728271	 Error:  0.000150	 <  0.001000
+[468.00 ns] SUCCESS	 x= -0.600342	 Real Tanh(x)= -0.537293	 Taylor Tanh(x)= -0.537289	 o_fx= -0.537354	 Error:  0.000064	 <  0.001000
+[476.00 ns] SUCCESS	 x= -0.302246	 Real Tanh(x)= -0.293367	 Taylor Tanh(x)= -0.293367	 o_fx= -0.293457	 Error:  0.000090	 <  0.001000
+[480.00 ns] SUCCESS	 x=  0.866211	 Real Tanh(x)=  0.699444	 Taylor Tanh(x)=  0.699019	 o_fx=  0.698486	 Error:  0.000533	 <  0.001000
+[484.00 ns] SUCCESS	 x=  0.172607	 Real Tanh(x)=  0.170913	 Taylor Tanh(x)=  0.170913	 o_fx=  0.170898	 Error:  0.000015	 <  0.001000
+[488.00 ns] SUCCESS	 x=  0.400146	 Real Tanh(x)=  0.380074	 Taylor Tanh(x)=  0.380074	 o_fx=  0.379883	 Error:  0.000192	 <  0.001000
+[496.00 ns] SUCCESS	 x= -0.026367	 Real Tanh(x)= -0.026361	 Taylor Tanh(x)= -0.026361	 o_fx= -0.026367	 Error:  0.000006	 <  0.001000
+[500.00 ns] SUCCESS	 x= -0.353271	 Real Tanh(x)= -0.339274	 Taylor Tanh(x)= -0.339274	 o_fx= -0.339355	 Error:  0.000082	 <  0.001000
+TEST PASSED!          43 results (out of          43) have an error within the specified tolerance!
+$stop called at time : 504 ns : File "C:/Users/g55wang/lab3_template/tb/tanh_tb.sv" Line 221

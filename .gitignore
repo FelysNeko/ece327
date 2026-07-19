@@ -5,11 +5,23 @@
 !lab2/
 !lab2_template/
 !lab2_system/
+!lab3/
+!lab3_template/
+!lab3_system/
+!lab4/
+!lab4_template/
+!lab4_system/
 
 !lab1/**
 !lab1_system/**
 !lab2/**
 !lab2_template/**
 !lab2_system/**
+!lab3/**
+!lab3_template/**
+!lab3_system/**
+!lab4/**
+!lab4_template/**
+!lab4_system/**
 
 !.gitignore

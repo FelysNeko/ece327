@@ -1,0 +1,7 @@
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/g55wang/lab3_template/src/tanh.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tanh
+INFO: [VRFC 10-311] analyzing module q212_dsp_muladd
+INFO: [VRFC 10-311] analyzing module q212_delay
+INFO: [VRFC 10-311] analyzing module bit_delay
+INFO: [VRFC 10-2263] Analyzing SystemVerilog file "C:/Users/g55wang/lab3_template/tb/tanh_tb.sv" into library xil_defaultlib
+INFO: [VRFC 10-311] analyzing module tanh_tb
