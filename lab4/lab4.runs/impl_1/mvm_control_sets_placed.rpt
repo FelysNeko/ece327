@@ -1,0 +1,88 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2.2 (win64) Build 6060944 Thu Mar 06 19:10:01 MST 2025
+| Date         : Sun Jul 26 15:12:07 2026
+| Host         : ECE-MCU2-10 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file mvm_control_sets_placed.rpt
+| Design       : mvm
+| Device       : xck26
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    10 |
+|    Minimum number of control sets                        |     8 |
+|    Addition due to synthesis replication                 |     1 |
+|    Addition due to physical synthesis replication        |     1 |
+| Unused register locations in slices containing registers |    15 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    10 |
+| >= 0 to < 4        |     0 |
+| >= 4 to < 6        |     0 |
+| >= 6 to < 8        |     0 |
+| >= 8 to < 10       |     0 |
+| >= 10 to < 12      |     2 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |     8 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |            9646 |         2555 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |             206 |          122 |
+| Yes          | No                    | No                     |           15782 |         2713 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |            1223 |          469 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++--------------+---------------------------------------+--------------------+------------------+----------------+--------------+
+| Clock Signal |             Enable Signal             |  Set/Reset Signal  | Slice Load Count | Bel Load Count | Bels / Slice |
++--------------+---------------------------------------+--------------------+------------------+----------------+--------------+
+|  clk         | gen_olanes[0].u_accum/E[0]            | rst                |                2 |             10 |         5.00 |
+|  clk         | u_ctrl/rows_left[9]_i_1_n_0           | rst                |                2 |             10 |         5.00 |
+|  clk         | u_ctrl/next_state                     | rst                |                6 |             17 |         2.83 |
+|  clk         | valid_pipe_reg[8][6]_rep__16_n_0      |                    |                3 |             19 |         6.33 |
+|  clk         | valid_pipe_reg[8][6]_rep__12_n_0_repN |                    |                5 |             19 |         3.80 |
+|  clk         | u_ctrl/words_left                     | rst                |                8 |             26 |         3.25 |
+|  clk         |                                       | rst                |              122 |            206 |         1.69 |
+|  clk         | gen_olanes[55].u_dot8/p_0_in          | u_ctrl/state_reg_0 |              458 |           1160 |         2.53 |
+|  clk         |                                       |                    |             2555 |           9649 |         3.78 |
+|  clk         | gen_olanes[55].u_dot8/p_0_in          |                    |             2705 |          15744 |         5.82 |
++--------------+---------------------------------------+--------------------+------------------+----------------+--------------+
+
+

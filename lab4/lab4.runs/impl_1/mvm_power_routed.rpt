@@ -1,0 +1,1578 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version     : Vivado v.2024.2.2 (win64) Build 6060944 Thu Mar 06 19:10:01 MST 2025
+| Date             : Sun Jul 26 15:21:28 2026
+| Host             : ECE-MCU2-10 running 64-bit major release  (build 9200)
+| Command          : report_power -file mvm_power_routed.rpt -pb mvm_power_summary_routed.pb -rpx mvm_power_routed.rpx
+| Design           : mvm
+| Device           : xck26-sfvc784-2LV-c
+| Design State     : routed
+| Grade            : commercial
+| Process          : typical
+| Characterization : Production
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+Power Report
+
+Table of Contents
+-----------------
+1. Summary
+1.1 On-Chip Components
+1.2 Power Supply Summary
+1.3 Confidence Level
+2. Settings
+2.1 Environment
+2.2 Clock Constraints
+3. Detailed Reports
+3.1 By Hierarchy
+
+1. Summary
+----------
+
++--------------------------+--------------+
+| Total On-Chip Power (W)  | 17.644       |
+| Design Power Budget (W)  | Unspecified* |
+| Power Budget Margin (W)  | NA           |
+| Dynamic (W)              | 17.168       |
+| Device Static (W)        | 0.477        |
+| Effective TJA (C/W)      | 2.3          |
+| Max Ambient (C)          | 44.1         |
+| Junction Temperature (C) | 65.9         |
+| Confidence Level         | Medium       |
+| Setting File             | ---          |
+| Simulation Activity File | ---          |
+| Design Nets Matched      | NA           |
++--------------------------+--------------+
+* Specify Design Power Budget using, set_operating_conditions -design_power_budget <value in Watts>
+
+
+1.1 On-Chip Components
+----------------------
+
++-------------------------+-----------+----------+-----------+-----------------+
+| On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
++-------------------------+-----------+----------+-----------+-----------------+
+| Clocks                  |     0.684 |        3 |       --- |             --- |
+| CLB Logic               |     1.082 |    49102 |       --- |             --- |
+|   LUT as Logic          |     0.735 |    14938 |    117120 |           12.75 |
+|   Register              |     0.237 |    27491 |    234240 |           11.74 |
+|   CARRY8                |     0.109 |     2688 |     14640 |           18.36 |
+|   LUT as Shift Register |    <0.001 |        3 |     57600 |           <0.01 |
+|   BUFG                  |    <0.001 |        1 |        32 |            3.13 |
+|   Others                |     0.000 |     3078 |       --- |             --- |
+| Signals                 |     4.915 |    54047 |       --- |             --- |
+| Block RAM               |     4.131 |      129 |       144 |           89.58 |
+| DSPs                    |     6.356 |     1152 |      1248 |           92.31 |
+| Static Power            |     0.477 |          |           |                 |
+| Total                   |    17.644 |          |           |                 |
++-------------------------+-----------+----------+-----------+-----------------+
+
+
+1.2 Power Supply Summary
+------------------------
+
++-----------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+| Source          | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
++-----------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+| Vccint          |       0.720 |    23.394 |      23.078 |      0.316 |       NA    | Unspecified | NA         |
+| Vccint_io       |       0.850 |     0.047 |       0.000 |      0.047 |       NA    | Unspecified | NA         |
+| Vccbram         |       0.850 |     0.653 |       0.648 |      0.005 |       NA    | Unspecified | NA         |
+| Vccaux          |       1.800 |     0.075 |       0.000 |      0.075 |       NA    | Unspecified | NA         |
+| Vccaux_io       |       1.800 |     0.031 |       0.000 |      0.031 |       NA    | Unspecified | NA         |
+| Vcco33          |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco25          |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco18          |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco15          |       1.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco135         |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco12          |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vcco10          |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vccadc          |       1.800 |     0.008 |       0.000 |      0.008 |       NA    | Unspecified | NA         |
+| VCC_PSINTFP     |       0.850 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_PSINTLP     |       0.850 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VPS_MGTRAVCC    |       0.850 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_PSINTFP_DDR |       0.850 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_PSPLL       |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VPS_MGTRAVTT    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCCO_PSDDR_504  |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_PSAUX       |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_PSBATT      |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_PSDDR_PLL   |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCCO_PSIO0_500  |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCCO_PSIO1_501  |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCCO_PSIO2_502  |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCCO_PSIO3_503  |       3.300 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| VCC_PSADC       |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| MGTAVcc         |       0.900 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| MGTAVtt         |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| MGTVccaux       |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
++-----------------+-------------+-----------+-------------+------------+-------------+-------------+------------+
+* The Vccint supply current exceeds the maximum limit of the selected package.  See the PCB design user guide for limit values.
+
+
+1.3 Confidence Level
+--------------------
+
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| User Input Data             | Confidence | Details                                        | Action                                                                                                     |
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+| Design implementation state | High       | Design is routed                               |                                                                                                            |
+| Clock nodes activity        | High       | User specified more than 95% of clocks         |                                                                                                            |
+| I/O nodes activity          | High       | User specified more than 95% of inputs         |                                                                                                            |
+| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views |
+| Device models               | High       | Device models are Production                   |                                                                                                            |
+|                             |            |                                                |                                                                                                            |
+| Overall confidence level    | Medium     |                                                |                                                                                                            |
++-----------------------------+------------+------------------------------------------------+------------------------------------------------------------------------------------------------------------+
+
+
+2. Settings
+-----------
+
+2.1 Environment
+---------------
+
++-----------------------+--------------------------+
+| Ambient Temp (C)      | 25.0                     |
+| ThetaJA (C/W)         | 2.3                      |
+| Airflow (LFM)         | 250                      |
+| Heat Sink             | medium (Medium Profile)  |
+| ThetaSA (C/W)         | 5.5                      |
+| Board Selection       | medium (10"x10")         |
+| # of Board Layers     | 12to15 (12 to 15 Layers) |
+| Board Temperature (C) | 25.0                     |
++-----------------------+--------------------------+
+
+
+2.2 Clock Constraints
+---------------------
+
++-------+--------+-----------------+
+| Clock | Domain | Constraint (ns) |
++-------+--------+-----------------+
+| clk   | clk    |             1.0 |
++-------+--------+-----------------+
+
+
+3. Detailed Reports
+-------------------
+
+3.1 By Hierarchy
+----------------
+
++-----------------------------+-----------+
+| Name                        | Power (W) |
++-----------------------------+-----------+
+| mvm                         |    17.168 |
+|   gen_olanes[0].u_accum     |     0.003 |
+|   gen_olanes[0].u_dot8      |     0.079 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[0].u_mat_mem   |     0.044 |
+|   gen_olanes[100].u_accum   |     0.003 |
+|   gen_olanes[100].u_dot8    |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[100].u_mat_mem |     0.038 |
+|   gen_olanes[101].u_accum   |     0.003 |
+|   gen_olanes[101].u_dot8    |     0.078 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.008 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[101].u_mat_mem |     0.041 |
+|   gen_olanes[102].u_accum   |     0.003 |
+|   gen_olanes[102].u_dot8    |     0.075 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[102].u_mat_mem |     0.040 |
+|   gen_olanes[103].u_accum   |     0.003 |
+|   gen_olanes[103].u_dot8    |     0.076 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[103].u_mat_mem |     0.037 |
+|   gen_olanes[104].u_accum   |     0.003 |
+|   gen_olanes[104].u_dot8    |     0.070 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[104].u_mat_mem |     0.044 |
+|   gen_olanes[105].u_accum   |     0.003 |
+|   gen_olanes[105].u_dot8    |     0.070 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[105].u_mat_mem |     0.043 |
+|   gen_olanes[106].u_accum   |     0.003 |
+|   gen_olanes[106].u_dot8    |     0.068 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[106].u_mat_mem |     0.044 |
+|   gen_olanes[107].u_accum   |     0.003 |
+|   gen_olanes[107].u_dot8    |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.008 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[107].u_mat_mem |     0.040 |
+|   gen_olanes[108].u_accum   |     0.003 |
+|   gen_olanes[108].u_dot8    |     0.067 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[108].u_mat_mem |     0.042 |
+|   gen_olanes[109].u_accum   |     0.003 |
+|   gen_olanes[109].u_dot8    |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[109].u_mat_mem |     0.040 |
+|   gen_olanes[10].u_accum    |     0.003 |
+|   gen_olanes[10].u_dot8     |     0.076 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.008 |
+|     gen_dsp_mult[7].u_mult  |     0.009 |
+|   gen_olanes[10].u_mat_mem  |     0.039 |
+|   gen_olanes[110].u_accum   |     0.003 |
+|   gen_olanes[110].u_dot8    |     0.075 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[110].u_mat_mem |     0.044 |
+|   gen_olanes[111].u_accum   |     0.003 |
+|   gen_olanes[111].u_dot8    |     0.074 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[111].u_mat_mem |     0.042 |
+|   gen_olanes[112].u_accum   |     0.003 |
+|   gen_olanes[112].u_dot8    |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.008 |
+|   gen_olanes[112].u_mat_mem |     0.039 |
+|   gen_olanes[113].u_accum   |     0.003 |
+|   gen_olanes[113].u_dot8    |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.009 |
+|   gen_olanes[113].u_mat_mem |     0.041 |
+|   gen_olanes[114].u_accum   |     0.003 |
+|   gen_olanes[114].u_dot8    |     0.078 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.008 |
+|   gen_olanes[114].u_mat_mem |     0.040 |
+|   gen_olanes[115].u_accum   |     0.003 |
+|   gen_olanes[115].u_dot8    |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[115].u_mat_mem |     0.041 |
+|   gen_olanes[116].u_accum   |     0.003 |
+|   gen_olanes[116].u_dot8    |     0.074 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.008 |
+|   gen_olanes[116].u_mat_mem |     0.039 |
+|   gen_olanes[117].u_accum   |     0.003 |
+|   gen_olanes[117].u_dot8    |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[117].u_mat_mem |     0.040 |
+|   gen_olanes[118].u_accum   |     0.003 |
+|   gen_olanes[118].u_dot8    |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[118].u_mat_mem |     0.037 |
+|   gen_olanes[119].u_accum   |     0.003 |
+|   gen_olanes[119].u_dot8    |     0.079 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[119].u_mat_mem |     0.038 |
+|   gen_olanes[11].u_accum    |     0.003 |
+|   gen_olanes[11].u_dot8     |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[11].u_mat_mem  |     0.041 |
+|   gen_olanes[120].u_accum   |     0.003 |
+|   gen_olanes[120].u_dot8    |     0.070 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[120].u_mat_mem |     0.039 |
+|   gen_olanes[121].u_accum   |     0.003 |
+|   gen_olanes[121].u_dot8    |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[121].u_mat_mem |     0.038 |
+|   gen_olanes[122].u_accum   |     0.003 |
+|   gen_olanes[122].u_dot8    |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[122].u_mat_mem |     0.037 |
+|   gen_olanes[123].u_accum   |     0.003 |
+|   gen_olanes[123].u_dot8    |     0.075 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.008 |
+|     gen_dsp_mult[4].u_mult  |     0.008 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.008 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[123].u_mat_mem |     0.040 |
+|   gen_olanes[124].u_accum   |     0.003 |
+|   gen_olanes[124].u_dot8    |     0.070 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[124].u_mat_mem |     0.039 |
+|   gen_olanes[125].u_accum   |     0.003 |
+|   gen_olanes[125].u_dot8    |     0.067 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[125].u_mat_mem |     0.037 |
+|   gen_olanes[126].u_accum   |     0.003 |
+|   gen_olanes[126].u_dot8    |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[126].u_mat_mem |     0.043 |
+|   gen_olanes[127].u_accum   |     0.003 |
+|   gen_olanes[127].u_dot8    |     0.076 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[127].u_mat_mem |     0.037 |
+|   gen_olanes[12].u_accum    |     0.003 |
+|   gen_olanes[12].u_dot8     |     0.076 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[12].u_mat_mem  |     0.040 |
+|   gen_olanes[13].u_accum    |     0.003 |
+|   gen_olanes[13].u_dot8     |     0.067 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[13].u_mat_mem  |     0.039 |
+|   gen_olanes[14].u_accum    |     0.003 |
+|   gen_olanes[14].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.008 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[14].u_mat_mem  |     0.039 |
+|   gen_olanes[15].u_accum    |     0.003 |
+|   gen_olanes[15].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[15].u_mat_mem  |     0.040 |
+|   gen_olanes[16].u_accum    |     0.003 |
+|   gen_olanes[16].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.008 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[16].u_mat_mem  |     0.041 |
+|   gen_olanes[17].u_accum    |     0.003 |
+|   gen_olanes[17].u_dot8     |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[17].u_mat_mem  |     0.039 |
+|   gen_olanes[18].u_accum    |     0.003 |
+|   gen_olanes[18].u_dot8     |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[18].u_mat_mem  |     0.039 |
+|   gen_olanes[19].u_accum    |     0.003 |
+|   gen_olanes[19].u_dot8     |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[19].u_mat_mem  |     0.040 |
+|   gen_olanes[1].u_accum     |     0.003 |
+|   gen_olanes[1].u_dot8      |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[1].u_mat_mem   |     0.039 |
+|   gen_olanes[20].u_accum    |     0.003 |
+|   gen_olanes[20].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[20].u_mat_mem  |     0.041 |
+|   gen_olanes[21].u_accum    |     0.003 |
+|   gen_olanes[21].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[21].u_mat_mem  |     0.040 |
+|   gen_olanes[22].u_accum    |     0.003 |
+|   gen_olanes[22].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.008 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[22].u_mat_mem  |     0.044 |
+|   gen_olanes[23].u_accum    |     0.003 |
+|   gen_olanes[23].u_dot8     |     0.079 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.009 |
+|     gen_dsp_mult[3].u_mult  |     0.008 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[23].u_mat_mem  |     0.041 |
+|   gen_olanes[24].u_accum    |     0.003 |
+|   gen_olanes[24].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[24].u_mat_mem  |     0.041 |
+|   gen_olanes[25].u_accum    |     0.003 |
+|   gen_olanes[25].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.008 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[25].u_mat_mem  |     0.039 |
+|   gen_olanes[26].u_accum    |     0.003 |
+|   gen_olanes[26].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[26].u_mat_mem  |     0.038 |
+|   gen_olanes[27].u_accum    |     0.003 |
+|   gen_olanes[27].u_dot8     |     0.080 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[27].u_mat_mem  |     0.040 |
+|   gen_olanes[28].u_accum    |     0.003 |
+|   gen_olanes[28].u_dot8     |     0.076 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.008 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[28].u_mat_mem  |     0.042 |
+|   gen_olanes[29].u_accum    |     0.003 |
+|   gen_olanes[29].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[29].u_mat_mem  |     0.045 |
+|   gen_olanes[2].u_accum     |     0.003 |
+|   gen_olanes[2].u_dot8      |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[2].u_mat_mem   |     0.039 |
+|   gen_olanes[30].u_accum    |     0.003 |
+|   gen_olanes[30].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[30].u_mat_mem  |     0.041 |
+|   gen_olanes[31].u_accum    |     0.003 |
+|   gen_olanes[31].u_dot8     |     0.075 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[31].u_mat_mem  |     0.041 |
+|   gen_olanes[32].u_accum    |     0.003 |
+|   gen_olanes[32].u_dot8     |     0.075 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[32].u_mat_mem  |     0.041 |
+|   gen_olanes[33].u_accum    |     0.003 |
+|   gen_olanes[33].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[33].u_mat_mem  |     0.042 |
+|   gen_olanes[34].u_accum    |     0.003 |
+|   gen_olanes[34].u_dot8     |     0.081 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.008 |
+|   gen_olanes[34].u_mat_mem  |     0.040 |
+|   gen_olanes[35].u_accum    |     0.003 |
+|   gen_olanes[35].u_dot8     |     0.076 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.008 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[35].u_mat_mem  |     0.044 |
+|   gen_olanes[36].u_accum    |     0.003 |
+|   gen_olanes[36].u_dot8     |     0.078 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[36].u_mat_mem  |     0.040 |
+|   gen_olanes[37].u_accum    |     0.003 |
+|   gen_olanes[37].u_dot8     |     0.075 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.008 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[37].u_mat_mem  |     0.039 |
+|   gen_olanes[38].u_accum    |     0.003 |
+|   gen_olanes[38].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[38].u_mat_mem  |     0.042 |
+|   gen_olanes[39].u_accum    |     0.003 |
+|   gen_olanes[39].u_dot8     |     0.078 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.008 |
+|   gen_olanes[39].u_mat_mem  |     0.038 |
+|   gen_olanes[3].u_accum     |     0.003 |
+|   gen_olanes[3].u_dot8      |     0.075 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[3].u_mat_mem   |     0.042 |
+|   gen_olanes[40].u_accum    |     0.003 |
+|   gen_olanes[40].u_dot8     |     0.079 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[40].u_mat_mem  |     0.041 |
+|   gen_olanes[41].u_accum    |     0.003 |
+|   gen_olanes[41].u_dot8     |     0.078 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.008 |
+|   gen_olanes[41].u_mat_mem  |     0.040 |
+|   gen_olanes[42].u_accum    |     0.003 |
+|   gen_olanes[42].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[42].u_mat_mem  |     0.042 |
+|   gen_olanes[43].u_accum    |     0.003 |
+|   gen_olanes[43].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.008 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.009 |
+|   gen_olanes[43].u_mat_mem  |     0.039 |
+|   gen_olanes[44].u_accum    |     0.003 |
+|   gen_olanes[44].u_dot8     |     0.076 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.009 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[44].u_mat_mem  |     0.039 |
+|   gen_olanes[45].u_accum    |     0.003 |
+|   gen_olanes[45].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.009 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.008 |
+|   gen_olanes[45].u_mat_mem  |     0.042 |
+|   gen_olanes[46].u_accum    |     0.003 |
+|   gen_olanes[46].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.008 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[46].u_mat_mem  |     0.039 |
+|   gen_olanes[47].u_accum    |     0.003 |
+|   gen_olanes[47].u_dot8     |     0.078 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.008 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.008 |
+|   gen_olanes[47].u_mat_mem  |     0.038 |
+|   gen_olanes[48].u_accum    |     0.003 |
+|   gen_olanes[48].u_dot8     |     0.074 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[48].u_mat_mem  |     0.039 |
+|   gen_olanes[49].u_accum    |     0.003 |
+|   gen_olanes[49].u_dot8     |     0.079 |
+|     gen_dsp_mult[0].u_mult  |     0.009 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[49].u_mat_mem  |     0.042 |
+|   gen_olanes[4].u_accum     |     0.003 |
+|   gen_olanes[4].u_dot8      |     0.074 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[4].u_mat_mem   |     0.040 |
+|   gen_olanes[50].u_accum    |     0.003 |
+|   gen_olanes[50].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[50].u_mat_mem  |     0.039 |
+|   gen_olanes[51].u_accum    |     0.003 |
+|   gen_olanes[51].u_dot8     |     0.070 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[51].u_mat_mem  |     0.038 |
+|   gen_olanes[52].u_accum    |     0.003 |
+|   gen_olanes[52].u_dot8     |     0.078 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.008 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[52].u_mat_mem  |     0.039 |
+|   gen_olanes[53].u_accum    |     0.003 |
+|   gen_olanes[53].u_dot8     |     0.076 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[53].u_mat_mem  |     0.042 |
+|   gen_olanes[54].u_accum    |     0.003 |
+|   gen_olanes[54].u_dot8     |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[54].u_mat_mem  |     0.039 |
+|   gen_olanes[55].u_accum    |     0.003 |
+|   gen_olanes[55].u_dot8     |     0.075 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[55].u_mat_mem  |     0.040 |
+|   gen_olanes[56].u_accum    |     0.003 |
+|   gen_olanes[56].u_dot8     |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[56].u_mat_mem  |     0.039 |
+|   gen_olanes[57].u_accum    |     0.003 |
+|   gen_olanes[57].u_dot8     |     0.070 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[57].u_mat_mem  |     0.041 |
+|   gen_olanes[58].u_accum    |     0.003 |
+|   gen_olanes[58].u_dot8     |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[58].u_mat_mem  |     0.039 |
+|   gen_olanes[59].u_accum    |     0.003 |
+|   gen_olanes[59].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.008 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[59].u_mat_mem  |     0.041 |
+|   gen_olanes[5].u_accum     |     0.003 |
+|   gen_olanes[5].u_dot8      |     0.074 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[5].u_mat_mem   |     0.041 |
+|   gen_olanes[60].u_accum    |     0.003 |
+|   gen_olanes[60].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[60].u_mat_mem  |     0.038 |
+|   gen_olanes[61].u_accum    |     0.003 |
+|   gen_olanes[61].u_dot8     |     0.078 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[61].u_mat_mem  |     0.042 |
+|   gen_olanes[62].u_accum    |     0.003 |
+|   gen_olanes[62].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[62].u_mat_mem  |     0.042 |
+|   gen_olanes[63].u_accum    |     0.003 |
+|   gen_olanes[63].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[63].u_mat_mem  |     0.044 |
+|   gen_olanes[64].u_accum    |     0.003 |
+|   gen_olanes[64].u_dot8     |     0.079 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[64].u_mat_mem  |     0.040 |
+|   gen_olanes[65].u_accum    |     0.003 |
+|   gen_olanes[65].u_dot8     |     0.075 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.009 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[65].u_mat_mem  |     0.042 |
+|   gen_olanes[66].u_accum    |     0.003 |
+|   gen_olanes[66].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[66].u_mat_mem  |     0.042 |
+|   gen_olanes[67].u_accum    |     0.003 |
+|   gen_olanes[67].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.009 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[67].u_mat_mem  |     0.041 |
+|   gen_olanes[68].u_accum    |     0.003 |
+|   gen_olanes[68].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[68].u_mat_mem  |     0.042 |
+|   gen_olanes[69].u_accum    |     0.003 |
+|   gen_olanes[69].u_dot8     |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[69].u_mat_mem  |     0.041 |
+|   gen_olanes[6].u_accum     |     0.003 |
+|   gen_olanes[6].u_dot8      |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.008 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[6].u_mat_mem   |     0.041 |
+|   gen_olanes[70].u_accum    |     0.003 |
+|   gen_olanes[70].u_dot8     |     0.070 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[70].u_mat_mem  |     0.038 |
+|   gen_olanes[71].u_accum    |     0.003 |
+|   gen_olanes[71].u_dot8     |     0.067 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[71].u_mat_mem  |     0.037 |
+|   gen_olanes[72].u_accum    |     0.003 |
+|   gen_olanes[72].u_dot8     |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.008 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[72].u_mat_mem  |     0.039 |
+|   gen_olanes[73].u_accum    |     0.003 |
+|   gen_olanes[73].u_dot8     |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[73].u_mat_mem  |     0.040 |
+|   gen_olanes[74].u_accum    |     0.003 |
+|   gen_olanes[74].u_dot8     |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[74].u_mat_mem  |     0.037 |
+|   gen_olanes[75].u_accum    |     0.003 |
+|   gen_olanes[75].u_dot8     |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[75].u_mat_mem  |     0.037 |
+|   gen_olanes[76].u_accum    |     0.003 |
+|   gen_olanes[76].u_dot8     |     0.080 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.008 |
+|   gen_olanes[76].u_mat_mem  |     0.040 |
+|   gen_olanes[77].u_accum    |     0.003 |
+|   gen_olanes[77].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[77].u_mat_mem  |     0.041 |
+|   gen_olanes[78].u_accum    |     0.003 |
+|   gen_olanes[78].u_dot8     |     0.080 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[78].u_mat_mem  |     0.040 |
+|   gen_olanes[79].u_accum    |     0.003 |
+|   gen_olanes[79].u_dot8     |     0.070 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.008 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[79].u_mat_mem  |     0.039 |
+|   gen_olanes[7].u_accum     |     0.004 |
+|   gen_olanes[7].u_dot8      |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[7].u_mat_mem   |     0.042 |
+|   gen_olanes[80].u_accum    |     0.003 |
+|   gen_olanes[80].u_dot8     |     0.070 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[80].u_mat_mem  |     0.042 |
+|   gen_olanes[81].u_accum    |     0.003 |
+|   gen_olanes[81].u_dot8     |     0.075 |
+|     gen_dsp_mult[0].u_mult  |     0.008 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[81].u_mat_mem  |     0.043 |
+|   gen_olanes[82].u_accum    |     0.003 |
+|   gen_olanes[82].u_dot8     |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[82].u_mat_mem  |     0.041 |
+|   gen_olanes[83].u_accum    |     0.003 |
+|   gen_olanes[83].u_dot8     |     0.074 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.008 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[83].u_mat_mem  |     0.041 |
+|   gen_olanes[84].u_accum    |     0.003 |
+|   gen_olanes[84].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[84].u_mat_mem  |     0.043 |
+|   gen_olanes[85].u_accum    |     0.003 |
+|   gen_olanes[85].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[85].u_mat_mem  |     0.043 |
+|   gen_olanes[86].u_accum    |     0.003 |
+|   gen_olanes[86].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[86].u_mat_mem  |     0.043 |
+|   gen_olanes[87].u_accum    |     0.003 |
+|   gen_olanes[87].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[87].u_mat_mem  |     0.043 |
+|   gen_olanes[88].u_accum    |     0.003 |
+|   gen_olanes[88].u_dot8     |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[88].u_mat_mem  |     0.044 |
+|   gen_olanes[89].u_accum    |     0.003 |
+|   gen_olanes[89].u_dot8     |     0.073 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[89].u_mat_mem  |     0.044 |
+|   gen_olanes[8].u_accum     |     0.003 |
+|   gen_olanes[8].u_dot8      |     0.069 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[8].u_mat_mem   |     0.040 |
+|   gen_olanes[90].u_accum    |     0.003 |
+|   gen_olanes[90].u_dot8     |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[90].u_mat_mem  |     0.044 |
+|   gen_olanes[91].u_accum    |     0.003 |
+|   gen_olanes[91].u_dot8     |     0.072 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[91].u_mat_mem  |     0.043 |
+|   gen_olanes[92].u_accum    |     0.003 |
+|   gen_olanes[92].u_dot8     |     0.074 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.007 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[92].u_mat_mem  |     0.044 |
+|   gen_olanes[93].u_accum    |     0.003 |
+|   gen_olanes[93].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[93].u_mat_mem  |     0.045 |
+|   gen_olanes[94].u_accum    |     0.003 |
+|   gen_olanes[94].u_dot8     |     0.071 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[94].u_mat_mem  |     0.042 |
+|   gen_olanes[95].u_accum    |     0.003 |
+|   gen_olanes[95].u_dot8     |     0.074 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.008 |
+|   gen_olanes[95].u_mat_mem  |     0.045 |
+|   gen_olanes[96].u_accum    |     0.003 |
+|   gen_olanes[96].u_dot8     |     0.068 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[96].u_mat_mem  |     0.037 |
+|   gen_olanes[97].u_accum    |     0.003 |
+|   gen_olanes[97].u_dot8     |     0.079 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.007 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[97].u_mat_mem  |     0.039 |
+|   gen_olanes[98].u_accum    |     0.003 |
+|   gen_olanes[98].u_dot8     |     0.077 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.006 |
+|   gen_olanes[98].u_mat_mem  |     0.040 |
+|   gen_olanes[99].u_accum    |     0.003 |
+|   gen_olanes[99].u_dot8     |     0.083 |
+|     gen_dsp_mult[0].u_mult  |     0.007 |
+|     gen_dsp_mult[1].u_mult  |     0.008 |
+|     gen_dsp_mult[2].u_mult  |     0.006 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.007 |
+|     gen_dsp_mult[5].u_mult  |     0.007 |
+|     gen_dsp_mult[6].u_mult  |     0.006 |
+|     gen_dsp_mult[7].u_mult  |     0.009 |
+|   gen_olanes[99].u_mat_mem  |     0.040 |
+|   gen_olanes[9].u_accum     |     0.003 |
+|   gen_olanes[9].u_dot8      |     0.068 |
+|     gen_dsp_mult[0].u_mult  |     0.006 |
+|     gen_dsp_mult[1].u_mult  |     0.006 |
+|     gen_dsp_mult[2].u_mult  |     0.007 |
+|     gen_dsp_mult[3].u_mult  |     0.006 |
+|     gen_dsp_mult[4].u_mult  |     0.006 |
+|     gen_dsp_mult[5].u_mult  |     0.006 |
+|     gen_dsp_mult[6].u_mult  |     0.007 |
+|     gen_dsp_mult[7].u_mult  |     0.007 |
+|   gen_olanes[9].u_mat_mem   |     0.040 |
+|   u_ctrl                    |     0.032 |
+|   u_vec_mem                 |     0.110 |
++-----------------------------+-----------+
+
+

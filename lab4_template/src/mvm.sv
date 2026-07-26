@@ -12,7 +12,7 @@ module mvm # (
     parameter VEC_ADDRW = $clog2(VEC_MEM_DEPTH),
     parameter MAT_MEM_DEPTH = 512,
     parameter MAT_ADDRW = $clog2(MAT_MEM_DEPTH),
-    parameter NUM_OLANES = 8
+    parameter NUM_OLANES = 128
 )(
     input clk,
     input rst,
@@ -34,10 +34,12 @@ module mvm # (
 
 /******* Your code starts here *******/
 
-localparam VEC_SIZEW = VEC_ADDRW + 1;
-localparam MAT_SIZEW = MAT_ADDRW + 1;
-// dot8 contains multiplier registers followed by three registered adder levels.
-localparam DOT_LATENCY = 4;
+localparam integer VEC_SIZEW = VEC_ADDRW + 1;
+localparam integer MAT_SIZEW = MAT_ADDRW + 1;
+localparam integer LANES_PER_GROUP = 8;
+localparam integer NUM_GROUPS =
+    (NUM_OLANES + LANES_PER_GROUP - 1) / LANES_PER_GROUP;
+localparam integer DOT_LATENCY = 7;
 
 logic [VEC_ADDRW-1:0] ctrl_vec_raddr;
 logic [MAT_ADDRW-1:0] ctrl_mat_raddr;
@@ -46,28 +48,52 @@ logic ctrl_accum_last;
 logic ctrl_ovalid;
 logic ctrl_busy;
 
+// Address replication stage. One matrix-address copy drives only eight BRAMs.
+logic [VEC_ADDRW-1:0] vec_raddr_q;
+logic [MAT_ADDRW-1:0] mat_raddr_q [0:NUM_GROUPS-1];
+logic addr_valid_q;
+logic addr_first_q;
+logic addr_last_q;
+
 logic [MEM_DATAW-1:0] vec_rdata;
 logic [MEM_DATAW-1:0] mat_rdata [0:NUM_OLANES-1];
 
-logic mem_data_valid;
-logic mem_data_first;
-logic mem_data_last;
-logic [DOT_LATENCY-1:0] first_pipe;
-logic [DOT_LATENCY-1:0] last_pipe;
+logic mem_valid_q;
+logic mem_first_q;
+logic mem_last_q;
+
+// Two-level vector replication tree: BRAM -> group copy -> lane copy.
+logic signed [MEM_DATAW-1:0] vec_group [0:NUM_GROUPS-1];
+logic group_valid [0:NUM_GROUPS-1];
+logic group_first [0:NUM_GROUPS-1];
+logic group_last [0:NUM_GROUPS-1];
+
+logic signed [MEM_DATAW-1:0] vec_lane [0:NUM_OLANES-1];
+logic signed [MEM_DATAW-1:0] mat_stage0 [0:NUM_OLANES-1];
+logic signed [MEM_DATAW-1:0] mat_lane [0:NUM_OLANES-1];
+logic lane_valid [0:NUM_GROUPS-1];
+logic lane_first [0:NUM_GROUPS-1];
+logic lane_last [0:NUM_GROUPS-1];
+
+// Shared control pipelines, one per eight-lane group. These ordinary FFs
+// replace 128 duplicated dot-valid pipelines and avoid SRL pulse-width issues.
+(* shreg_extract = "no" *) logic [DOT_LATENCY-1:0] valid_pipe [0:NUM_GROUPS-1];
+(* shreg_extract = "no" *) logic [DOT_LATENCY-1:0] first_pipe [0:NUM_GROUPS-1];
+(* shreg_extract = "no" *) logic [DOT_LATENCY-1:0] last_pipe [0:NUM_GROUPS-1];
 
 logic signed [OWIDTH-1:0] dot_result [0:NUM_OLANES-1];
-logic [NUM_OLANES-1:0] dot_ovalid;
 logic signed [OWIDTH-1:0] accum_result [0:NUM_OLANES-1];
 logic [NUM_OLANES-1:0] accum_ovalid;
-logic all_accum_valid;
 
 logic busy_reg;
-logic [MAT_SIZEW-1:0] expected_output_chunks;
-logic [MAT_SIZEW-1:0] completed_output_chunks;
+logic [MAT_SIZEW-1:0] output_groups_left;
 
-integer pipe_i;
+integer addr_group_i;
+integer copy_group_i;
+integer pipe_group_i;
+integer pipe_stage_i;
 
-ctrl # (
+ctrl #(
     .VEC_ADDRW(VEC_ADDRW),
     .MAT_ADDRW(MAT_ADDRW),
     .VEC_SIZEW(VEC_SIZEW),
@@ -88,7 +114,24 @@ ctrl # (
     .busy(ctrl_busy)
 );
 
-mem # (
+// Replicate the high-fanout read address before it reaches the BRAMs.
+always_ff @(posedge clk) begin
+    if (rst) begin
+        addr_valid_q <= 1'b0;
+        addr_first_q <= 1'b0;
+        addr_last_q  <= 1'b0;
+    end else begin
+        vec_raddr_q <= ctrl_vec_raddr;
+        for (addr_group_i = 0; addr_group_i < NUM_GROUPS; addr_group_i = addr_group_i + 1) begin
+            mat_raddr_q[addr_group_i] <= ctrl_mat_raddr;
+        end
+        addr_valid_q <= ctrl_ovalid;
+        addr_first_q <= ctrl_accum_first;
+        addr_last_q  <= ctrl_accum_last;
+    end
+end
+
+mem #(
     .DATAW(MEM_DATAW),
     .DEPTH(VEC_MEM_DEPTH),
     .ADDRW(VEC_ADDRW)
@@ -97,38 +140,102 @@ mem # (
     .wdata(i_vec_wdata),
     .waddr(i_vec_waddr),
     .wen(i_vec_wen),
-    .raddr(ctrl_vec_raddr),
+    .raddr(vec_raddr_q),
     .rdata(vec_rdata)
 );
 
-// The memory output becomes usable one cycle after the controller issues an
-// address. Delay its control bits by the same amount before presenting them to
-// the dot-product units.
+// Align metadata with the one-cycle synchronous memory read.
 always_ff @(posedge clk) begin
     if (rst) begin
-        mem_data_valid <= 1'b0;
-        mem_data_first <= 1'b0;
-        mem_data_last  <= 1'b0;
-        first_pipe     <= '0;
-        last_pipe      <= '0;
+        mem_valid_q <= 1'b0;
+        mem_first_q <= 1'b0;
+        mem_last_q  <= 1'b0;
     end else begin
-        mem_data_valid <= ctrl_ovalid;
-        mem_data_first <= ctrl_accum_first;
-        mem_data_last  <= ctrl_accum_last;
+        mem_valid_q <= addr_valid_q;
+        mem_first_q <= addr_first_q;
+        mem_last_q  <= addr_last_q;
+    end
+end
 
-        first_pipe[0] <= mem_data_first;
-        last_pipe[0]  <= mem_data_last;
-        for (pipe_i = 1; pipe_i < DOT_LATENCY; pipe_i = pipe_i + 1) begin
-            first_pipe[pipe_i] <= first_pipe[pipe_i-1];
-            last_pipe[pipe_i]  <= last_pipe[pipe_i-1];
+// Group-level vector copies and metadata.
+always_ff @(posedge clk) begin
+    if (rst) begin
+        for (copy_group_i = 0; copy_group_i < NUM_GROUPS; copy_group_i = copy_group_i + 1) begin
+            group_valid[copy_group_i] <= 1'b0;
+            group_first[copy_group_i] <= 1'b0;
+            group_last[copy_group_i]  <= 1'b0;
+        end
+    end else begin
+        for (copy_group_i = 0; copy_group_i < NUM_GROUPS; copy_group_i = copy_group_i + 1) begin
+            vec_group[copy_group_i]   <= $signed(vec_rdata);
+            group_valid[copy_group_i] <= mem_valid_q;
+            group_first[copy_group_i] <= mem_first_q;
+            group_last[copy_group_i]  <= mem_last_q;
         end
     end
 end
 
+// A single shared valid/first/last pipeline per group.
+always_ff @(posedge clk) begin
+    if (rst) begin
+        for (pipe_group_i = 0; pipe_group_i < NUM_GROUPS; pipe_group_i = pipe_group_i + 1) begin
+            lane_valid[pipe_group_i] <= 1'b0;
+            lane_first[pipe_group_i] <= 1'b0;
+            lane_last[pipe_group_i]  <= 1'b0;
+            valid_pipe[pipe_group_i] <= '0;
+            first_pipe[pipe_group_i] <= '0;
+            last_pipe[pipe_group_i]  <= '0;
+        end
+    end else begin
+        for (pipe_group_i = 0; pipe_group_i < NUM_GROUPS; pipe_group_i = pipe_group_i + 1) begin
+            lane_valid[pipe_group_i] <= group_valid[pipe_group_i];
+            lane_first[pipe_group_i] <= group_first[pipe_group_i];
+            lane_last[pipe_group_i]  <= group_last[pipe_group_i];
+
+            valid_pipe[pipe_group_i][0] <= lane_valid[pipe_group_i];
+            first_pipe[pipe_group_i][0] <= lane_first[pipe_group_i];
+            last_pipe[pipe_group_i][0]  <= lane_last[pipe_group_i];
+
+            for (pipe_stage_i = 1; pipe_stage_i < DOT_LATENCY; pipe_stage_i = pipe_stage_i + 1) begin
+                valid_pipe[pipe_group_i][pipe_stage_i] <= valid_pipe[pipe_group_i][pipe_stage_i-1];
+                first_pipe[pipe_group_i][pipe_stage_i] <= first_pipe[pipe_group_i][pipe_stage_i-1];
+                last_pipe[pipe_group_i][pipe_stage_i]  <= last_pipe[pipe_group_i][pipe_stage_i-1];
+            end
+        end
+    end
+end
+
+// Keep busy asserted until the final output group actually exits the pipeline.
+always_ff @(posedge clk) begin
+    if (rst) begin
+        busy_reg           <= 1'b0;
+        output_groups_left <= '0;
+    end else begin
+        if (i_start && !busy_reg &&
+            (i_vec_num_words != '0) &&
+            (i_mat_num_rows_per_olane != '0)) begin
+            busy_reg           <= 1'b1;
+            output_groups_left <= i_mat_num_rows_per_olane;
+        end else if (accum_ovalid[0] && busy_reg) begin
+            if (output_groups_left == {{(MAT_SIZEW-1){1'b0}}, 1'b1}) begin
+                busy_reg           <= 1'b0;
+                output_groups_left <= '0;
+            end else begin
+                output_groups_left <= output_groups_left - 1'b1;
+            end
+        end
+    end
+end
+
+assign o_busy  = busy_reg;
+assign o_valid = accum_ovalid[0];
+
 genvar lane;
 generate
     for (lane = 0; lane < NUM_OLANES; lane = lane + 1) begin : gen_olanes
-        mem # (
+        localparam integer GROUP_ID = lane / LANES_PER_GROUP;
+
+        mem #(
             .DATAW(MEM_DATAW),
             .DEPTH(MAT_MEM_DEPTH),
             .ADDRW(MAT_ADDRW)
@@ -137,33 +244,44 @@ generate
             .wdata(i_mat_wdata),
             .waddr(i_mat_waddr),
             .wen(i_mat_wen[lane]),
-            .raddr(ctrl_mat_raddr),
+            .raddr(mat_raddr_q[GROUP_ID]),
             .rdata(mat_rdata[lane])
         );
 
-        dot8 # (
+        // First local matrix stage, immediately after the BRAM output.
+        always_ff @(posedge clk) begin
+            mat_stage0[lane] <= $signed(mat_rdata[lane]);
+        end
+
+        // Second replication/locality stage. Each DSP sees lane-local FFs.
+        always_ff @(posedge clk) begin
+            vec_lane[lane] <= vec_group[GROUP_ID];
+            mat_lane[lane] <= mat_stage0[lane];
+        end
+
+        dot8 #(
             .IWIDTH(IWIDTH),
             .OWIDTH(OWIDTH)
         ) u_dot8 (
             .clk(clk),
             .rst(rst),
-            .vec0(vec_rdata),
-            .vec1(mat_rdata[lane]),
-            .ivalid(mem_data_valid),
+            .vec0(vec_lane[lane]),
+            .vec1(mat_lane[lane]),
+            .ivalid(lane_valid[GROUP_ID]),
             .result(dot_result[lane]),
-            .ovalid(dot_ovalid[lane])
+            .ovalid()
         );
 
-        accum # (
+        accum #(
             .DATAW(OWIDTH),
             .ACCUMW(OWIDTH)
         ) u_accum (
             .clk(clk),
             .rst(rst),
             .data(dot_result[lane]),
-            .ivalid(dot_ovalid[lane]),
-            .first(first_pipe[DOT_LATENCY-1]),
-            .last(last_pipe[DOT_LATENCY-1]),
+            .ivalid(valid_pipe[GROUP_ID][DOT_LATENCY-1]),
+            .first(first_pipe[GROUP_ID][DOT_LATENCY-1]),
+            .last(last_pipe[GROUP_ID][DOT_LATENCY-1]),
             .result(accum_result[lane]),
             .ovalid(accum_ovalid[lane])
         );
@@ -171,36 +289,6 @@ generate
         assign o_result[lane*OWIDTH +: OWIDTH] = accum_result[lane];
     end
 endgenerate
-
-// All lanes operate in lockstep; a top-level output is valid only when every
-// lane has completed the current row group.
-assign all_accum_valid = &accum_ovalid;
-assign o_valid = all_accum_valid;
-
-// Keep busy asserted through pipeline drain, not merely while the controller
-// is issuing memory reads. One output chunk is produced per row per output lane.
-always_ff @(posedge clk) begin
-    if (rst) begin
-        busy_reg                <= 1'b0;
-        expected_output_chunks  <= '0;
-        completed_output_chunks <= '0;
-    end else begin
-        if (i_start && !busy_reg) begin
-            expected_output_chunks  <= i_mat_num_rows_per_olane;
-            completed_output_chunks <= '0;
-            busy_reg <= (i_vec_num_words != '0) &&
-                        (i_mat_num_rows_per_olane != '0);
-        end else if (busy_reg && all_accum_valid) begin
-            if (completed_output_chunks == expected_output_chunks - 1'b1) begin
-                busy_reg <= 1'b0;
-            end else begin
-                completed_output_chunks <= completed_output_chunks + 1'b1;
-            end
-        end
-    end
-end
-
-assign o_busy = busy_reg | ctrl_busy;
 
 /******* Your code ends here ********/
 

@@ -3,9 +3,10 @@
 Mar  6 2025
 19:11:35
 C:/Users/g55wang/lab4/lab4.sim/sim_1/behav/xsim/glbl.v,1734094861,verilog,,,,glbl,,uvm,,,,,,
-C:/Users/g55wang/lab4_template/src/accum.sv,1784475781,systemVerilog,,C:/Users/g55wang/lab4_template/src/ctrl.sv,,accum,,uvm,,,,,,
-C:/Users/g55wang/lab4_template/src/ctrl.sv,1784476965,systemVerilog,,C:/Users/g55wang/lab4_template/src/dot8.sv,,ctrl,,uvm,,,,,,
-C:/Users/g55wang/lab4_template/src/dot8.sv,1784474885,systemVerilog,,C:/Users/g55wang/lab4_template/src/mem.sv,,dot8,,uvm,,,,,,
+C:/Users/g55wang/lab4_template/src/accum.sv,1785091690,systemVerilog,,C:/Users/g55wang/lab4_template/src/ctrl.sv,,accum,,uvm,,,,,,
+C:/Users/g55wang/lab4_template/src/ctrl.sv,1785091690,systemVerilog,,C:/Users/g55wang/lab4_template/src/dot8.sv,,ctrl,,uvm,,,,,,
+C:/Users/g55wang/lab4_template/src/dot8.sv,1785091277,systemVerilog,,C:/Users/g55wang/lab4_template/src/mem.sv,,dot8;dsp_signed_mult_pipe,,uvm,,,,,,
 C:/Users/g55wang/lab4_template/src/mem.sv,1784471538,systemVerilog,,C:/Users/g55wang/lab4_template/src/mvm.sv,,mem,,uvm,,,,,,
-C:/Users/g55wang/lab4_template/src/mvm.sv,1784476962,systemVerilog,,C:/Users/g55wang/lab4_template/tb/mvm_tb.sv,,mvm,,uvm,,,,,,
+C:/Users/g55wang/lab4_template/src/mvm.sv,1785091618,systemVerilog,,C:/Users/g55wang/lab4_template/tb/mvm_tb_bonus128.sv,,mvm,,uvm,,,,,,
 C:/Users/g55wang/lab4_template/tb/mvm_tb.sv,1784471538,systemVerilog,,,,mvm_tb,,uvm,,,,,,
+,,,,,,mvm_tb_bonus128,,,,,,,,
